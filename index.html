@@ -1,247 +1,1823 @@
 <!DOCTYPE html>
-<html lang="id"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Panduan Ziarah Jalan Kaki – Sekitar Masjid Nabawi (Peta Miring)</title>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+<title>Peta Sejarah Interaktif · Masjid Nabawi</title>
 <style>
-:root{--tx:#111315;--sub:#5A6068;--ln:#E4E7EC;--sf:#F5F6F8;--nav:#2F6BFF;--t:58deg;--z:1.7;--s:360px;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-*{box-sizing:inherit}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;background:#fff;color:var(--tx);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-header{padding:12px 16px;border-bottom:1px solid var(--ln)}
-header h1{margin:0;font-size:18px;letter-spacing:-.01em}
-header p{margin:2px 0 0;font-size:13px;color:var(--sub)}
-main{max-width:760px;margin:0 auto;padding:10px 12px 28px}
-#view{position:relative;height:min(68vh,580px);background:var(--sf);border:1px solid var(--ln);border-radius:16px;overflow:hidden;perspective:900px;perspective-origin:50% 35%;touch-action:none;user-select:none}
-#plane{position:absolute;left:50%;top:50%;width:var(--s);height:var(--s);margin:calc(var(--s)/-2) 0 0 calc(var(--s)/-2);transform-style:preserve-3d;transition:transform .45s ease;background:#ECEFF3}
-.mq{position:absolute;left:36%;top:40%;width:28%;height:20%;pointer-events:none;border-radius:2px}
-.mqt{display:flex;align-items:center;justify-content:center;color:#fff;font-size:calc(var(--s)*.028);font-weight:700}
-.bb{position:absolute;width:0;height:0;transform-style:preserve-3d;transform-origin:0 0;transform:rotateX(calc(var(--t)*-1)) scale(calc(1/var(--z)));transition:transform .45s ease}
-.dot{position:absolute;left:0;top:0;width:28px;height:28px;padding:0;border:2.5px solid #fff;border-radius:50% 50% 50% 0;background:var(--c);transform:translate(-50%,-100%) rotate(-45deg);box-shadow:0 2px 6px rgba(17,19,21,.35);cursor:pointer;transform-origin:50% 100%;transition:transform .2s}
-.dot::before{content:"";position:absolute;inset:-9px}
-.dot::after{content:"";position:absolute;inset:7px;border-radius:50%;background:#fff}
-.dot:focus-visible{outline:3px solid var(--tx);outline-offset:3px}
-.tag{position:absolute;left:0;bottom:42px;transform:translateX(-50%);white-space:nowrap;display:none;background:#fff;border:2px solid var(--c);border-radius:999px;padding:3px 10px;font-size:12.5px;font-weight:700;box-shadow:0 2px 8px rgba(0,0,0,.18);pointer-events:none}
-.act .tag{display:block}
-.act .dot{transform:translate(-50%,-100%) rotate(-45deg) scale(1.4);animation:pl 1.2s ease-out infinite}
-@keyframes pl{0%{box-shadow:0 0 0 0 var(--c)}100%{box-shadow:0 0 0 16px transparent}}
-.dim .dot{opacity:.25}
-.cp{position:absolute;left:-13px;top:-13px;width:26px;height:26px;border-radius:50%;background:var(--tx);color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
-#me{position:absolute;width:0;height:0;display:none;transform-style:preserve-3d}
-.cone{position:absolute;left:calc(var(--s)*-.1);top:calc(var(--s)*-.2);width:calc(var(--s)*.2);height:calc(var(--s)*.2);transform-origin:50% 100%;clip-path:polygon(50% 100%,14% 0,86% 0);background:linear-gradient(to top,rgba(47,107,255,.6),rgba(47,107,255,0))}
-.av{position:absolute;left:-11px;top:-11px;width:22px;height:22px;border-radius:50%;background:var(--nav);border:3px solid #fff;box-shadow:0 0 0 0 rgba(47,107,255,.5),0 2px 6px rgba(0,0,0,.3);animation:av 1.8s infinite}
-@keyframes av{to{box-shadow:0 0 0 14px rgba(47,107,255,0),0 2px 6px rgba(0,0,0,.3)}}
-.fabs{position:absolute;right:10px;top:10px;display:flex;flex-direction:column;gap:8px;z-index:3}
-.fab{min-width:46px;min-height:46px;padding:0 12px;border-radius:23px;border:1px solid var(--ln);background:#fff;color:var(--tx);font:700 14px system-ui;box-shadow:0 2px 8px rgba(0,0,0,.15)}
-button{font-family:inherit}
-.pill{min-height:46px;padding:0 16px;border-radius:12px;border:1.5px solid var(--tx);background:#fff;color:var(--tx);font-size:15px;font-weight:600}
-.pill.on{background:var(--tx);color:#fff}
-#bGps.on,#bCmp.on{background:var(--nav);border-color:var(--nav)}
-button:focus-visible{outline:3px solid var(--nav);outline-offset:2px}
-.bar{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
-#sim{display:none;align-items:center;gap:10px;flex-wrap:wrap;background:var(--sf);border-radius:12px;padding:10px;margin-bottom:10px;font-size:14px}
-#sim input{flex:1;min-width:120px;min-height:36px}
-.pad{display:grid;grid-template-columns:repeat(3,44px);gap:4px}
-.pad button{min-height:44px;border-radius:10px;border:1px solid var(--ln);background:#fff;font-size:17px}
-#status{background:var(--sf);border-radius:12px;padding:10px 12px;font-size:14px;line-height:1.4;min-height:46px}
-.hit{display:block;width:100%;text-align:left;margin-top:6px;min-height:46px;border-radius:10px;border:0;background:var(--nav);color:#fff;font-size:15px;font-weight:600;padding:0 12px}
-.chips{display:flex;gap:8px;overflow-x:auto;padding:12px 0 6px}
-.chip{flex:none;min-height:42px;padding:0 14px;border-radius:999px;border:1px solid var(--ln);background:#fff;color:var(--tx);font-size:14px;font-weight:600}
-.chip.on{background:var(--tx);color:#fff;border-color:var(--tx)}
-ul{list-style:none;margin:0;padding:0}
-li{display:flex;gap:12px;align-items:center;min-height:58px;padding:8px 4px;border-bottom:1px solid var(--ln);cursor:pointer}
-li i{flex:none;width:14px;height:14px;border-radius:50%}
-li small{display:block;color:var(--sub);font-size:12.5px}
-.note{font-size:13.5px;line-height:1.5;background:var(--sf);border-radius:12px;padding:12px;margin:16px 0}
-#sheet{position:fixed;inset:auto 0 0 0;max-height:82vh;overflow:auto;background:#fff;border-radius:20px 20px 0 0;padding:16px 16px calc(22px + env(safe-area-inset-bottom,0px));box-shadow:0 -8px 30px rgba(0,0,0,.22);display:none;z-index:9;max-width:760px;margin:0 auto}
-#sheet h2{margin:8px 0 2px;font-size:19px;line-height:1.3}
-.badge{display:inline-block;color:#fff;font-size:12.5px;font-weight:700;border-radius:999px;padding:3px 10px;background:var(--c)}
-.meta{color:var(--sub);font-size:13.5px;margin:6px 0}
-.slots{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
-.slot{border:1.5px dashed #C3C8D0;border-radius:12px;min-height:116px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6px;font-size:12px;line-height:1.35;color:var(--sub);background:var(--sf);overflow:hidden}
-.slot img{width:100%;height:110px;object-fit:cover;border-radius:8px}
-.slot label{color:var(--nav);font-weight:700;margin-top:4px;text-decoration:underline}
-.key{border-radius:12px;padding:10px 12px;margin:12px 0;font-weight:700;background:color-mix(in srgb,var(--c) 14%,#fff);border-left:5px solid var(--c)}
-.warn{font-size:13px;line-height:1.45;background:var(--sf);border-radius:10px;padding:8px 10px;color:var(--sub)}
-.tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-</style></head>
+:root {
+  --bg: #ffffff;
+  --surface: #f5f6f8;
+  --border: #e4e7ec;
+  --text: #111315;
+  --sub: #5a6068;
+  --nav: #2563eb;
+  --cat-masjid: #d97706;
+  --cat-rumah: #dc2626;
+  --cat-sejarah: #4f46e5;
+  --cat-pintu: #059669;
+  --tilt: 56deg;
+  --rot: 0deg;
+  --zoom: 1.45;
+  --map-size: 520px;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* HEADER */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 16px;
+}
+.header-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: -0.02em;
+}
+.brand-mark {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: var(--text);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+.loc-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.loc-nav::-webkit-scrollbar { display: none; }
+.loc-btn {
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--sub);
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 6px 11px;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.loc-btn.active {
+  background: var(--text);
+  color: #fff;
+}
+.loc-btn.soon {
+  border-color: var(--border);
+  color: var(--sub);
+}
+.member-btn {
+  border: 1.5px solid var(--text);
+  background: var(--text);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 7px 13px;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.member-btn.logged {
+  background: #fff;
+  color: var(--text);
+}
+
+/* MAIN LAYOUT */
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 12px 14px 36px;
+}
+.hero-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.hero-bar h1 {
+  margin: 0;
+  font-size: 19px;
+  letter-spacing: -0.02em;
+}
+.hero-bar p {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: var(--sub);
+}
+
+/* MAP VIEWPORT */
+#mapWrap {
+  position: relative;
+  height: min(68vh, 560px);
+  background: #eaedf2;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  perspective: 1050px;
+  perspective-origin: 50% 38%;
+  touch-action: none;
+  user-select: none;
+}
+#mapWrap.fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  height: 100dvh;
+  border-radius: 0;
+  border: 0;
+}
+
+#plane {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--map-size);
+  height: var(--map-size);
+  margin-left: calc(var(--map-size) / -2);
+  margin-top: calc(var(--map-size) / -2);
+  transform-style: preserve-3d;
+  transition: transform 0.25s ease-out;
+  background: #eef1f5;
+}
+#plane.dragging { transition: none; }
+#plane.sat-mode {
+  background: #c7c1b5;
+}
+
+/* SATELLITE CUSTOM OVERLAY */
+#satImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+  pointer-events: none;
+}
+#plane.sat-mode #satImg.has-img {
+  display: block;
+}
+
+/* ARCHITECTURAL 2.5D EXTRUSIONS */
+.extrude {
+  position: absolute;
+  pointer-events: none;
+  transform-style: preserve-3d;
+}
+.minaret {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #1e293b;
+  border: 1.5px solid #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.35);
+  transform: translate(-50%, -50%) translateZ(16px);
+  pointer-events: none;
+}
+.minaret::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 2px;
+  height: 18px;
+  background: linear-gradient(to top, rgba(30,41,59,0.5), #1e293b);
+  transform-origin: bottom center;
+  transform: translate(-50%, -100%) rotateX(-56deg);
+}
+.green-dome {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #34d399, #059669 70%, #064e3b);
+  border: 1.5px solid #fff;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.35);
+  transform: translate(-50%, -50%) translateZ(12px);
+  pointer-events: none;
+}
+
+/* BILLBOARD PINS */
+.bb {
+  position: absolute;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  transform-origin: 0 0;
+  transform: rotateZ(calc(var(--rot) * -1)) rotateX(calc(var(--tilt) * -1)) scale(calc(1 / var(--zoom)));
+  transition: transform 0.25s ease-out;
+  z-index: 4;
+}
+.pin-btn {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border-radius: 50%;
+  border: 2.5px solid #fff;
+  background: var(--c);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 2px 7px rgba(17, 19, 21, 0.35);
+  cursor: pointer;
+  transition: transform 0.18s ease;
+}
+.pin-btn svg {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.pin-btn.gate-pin {
+  width: auto;
+  min-width: 26px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 7px;
+  font-size: 10.5px;
+  font-weight: 800;
+  border-width: 2px;
+}
+.pin-label {
+  position: absolute;
+  left: 0;
+  bottom: 20px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  display: none;
+  background: #fff;
+  color: var(--text);
+  border: 2px solid var(--c);
+  border-radius: 999px;
+  padding: 2px 9px;
+  font-size: 11.5px;
+  font-weight: 700;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
+  pointer-events: none;
+}
+.bb.active .pin-label,
+.bb.selected .pin-label { display: block; }
+.bb.active .pin-btn,
+.bb.selected .pin-btn {
+  transform: translate(-50%, -50%) scale(1.3);
+  z-index: 8;
+  animation: pulseRing 1.3s ease-out infinite;
+}
+@keyframes pulseRing {
+  0% { box-shadow: 0 0 0 0 var(--c); }
+  100% { box-shadow: 0 0 0 14px transparent; }
+}
+.bb.hidden-cat { display: none; }
+
+/* COMPASS LETTERS ON MAP */
+.cardinal {
+  position: absolute;
+  left: -12px;
+  top: -12px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(17, 19, 21, 0.85);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+/* USER AVATAR & FORWARD CONE */
+#me {
+  position: absolute;
+  width: 0;
+  height: 0;
+  display: none;
+  transform-style: preserve-3d;
+  z-index: 6;
+  pointer-events: none;
+}
+.cone {
+  position: absolute;
+  left: -46px;
+  top: -92px;
+  width: 92px;
+  height: 92px;
+  transform-origin: 50% 100%;
+  clip-path: polygon(50% 100%, 15% 0, 85% 0);
+  background: linear-gradient(to top, rgba(37, 99, 235, 0.55), rgba(37, 99, 235, 0));
+}
+.avatar {
+  position: absolute;
+  left: -12px;
+  top: -12px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--nav);
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+/* MAP FLOATING CONTROLS */
+.map-top-left {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  z-index: 15;
+  display: flex;
+  gap: 6px;
+}
+.map-top-right {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.map-bottom-bar {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  z-index: 15;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  pointer-events: none;
+}
+.map-bottom-bar > * { pointer-events: auto; }
+
+.fab {
+  min-width: 42px;
+  height: 42px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.96);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.14);
+  cursor: pointer;
+}
+.fab.icon-only {
+  width: 42px;
+  padding: 0;
+}
+.fab.active-btn {
+  background: var(--nav);
+  border-color: var(--nav);
+  color: #fff;
+}
+#compassNeedle {
+  display: inline-flex;
+  transition: transform 0.2s ease;
+}
+#btnRecenter {
+  display: none;
+  background: var(--text);
+  color: #fff;
+  border-color: var(--text);
+}
+#btnRecenter.show { display: inline-flex; }
+
+/* SENSOR & SIM CONTROLS */
+.control-strip {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 10px 0;
+}
+.pill {
+  min-height: 42px;
+  padding: 0 14px;
+  border-radius: 12px;
+  border: 1.5px solid var(--text);
+  background: #fff;
+  color: var(--text);
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.pill.on {
+  background: var(--nav);
+  border-color: var(--nav);
+  color: #fff;
+}
+
+#simPanel {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  font-size: 13.5px;
+}
+#simPanel input[type="range"] { flex: 1; min-width: 130px; }
+.dpad {
+  display: grid;
+  grid-template-columns: repeat(3, 38px);
+  gap: 4px;
+}
+.dpad button {
+  height: 38px;
+  border-radius: 9px;
+  border: 1px solid var(--border);
+  background: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* STATUS BAR */
+#statusBox {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 10px 12px;
+  font-size: 13.5px;
+}
+.detected-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 7px;
+  min-height: 42px;
+  border-radius: 10px;
+  border: 0;
+  background: var(--nav);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 0 12px;
+  cursor: pointer;
+}
+
+/* CATEGORY HIDE/SHOW CHIPS */
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 16px 0 8px;
+}
+.section-head h2 {
+  margin: 0;
+  font-size: 16px;
+}
+.cat-toggles {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.cat-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 38px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1.5px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.cat-chip .dot-c {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--c);
+}
+.cat-chip.off {
+  opacity: 0.45;
+  text-decoration: line-through;
+  background: var(--surface);
+}
+
+/* POINT LIST */
+.point-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--border);
+}
+.point-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 4px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+}
+.point-item:hover { background: #fafafa; }
+.point-ico {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--c) 14%, #fff);
+  color: var(--c);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.point-ico svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.point-body { flex: 1; min-width: 0; }
+.point-title {
+  font-weight: 700;
+  font-size: 14.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.lock-tag {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--sub);
+  border: 1px solid var(--border);
+}
+.point-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--sub);
+  font-size: 12.5px;
+  margin-top: 2px;
+  flex-wrap: wrap;
+}
+.dist-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+  color: var(--text);
+}
+.load-more-wrap {
+  text-align: center;
+  margin-top: 12px;
+}
+.load-more-btn {
+  min-height: 44px;
+  padding: 0 20px;
+  border-radius: 999px;
+  border: 1.5px solid var(--text);
+  background: #fff;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* FOOTER NOTE */
+.site-note {
+  margin-top: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px;
+  font-size: 13px;
+  color: var(--sub);
+}
+.site-note strong { color: var(--text); }
+
+/* BOTTOM SHEET & MODALS */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 19, 21, 0.45);
+  z-index: 95;
+  display: none;
+}
+.backdrop.open { display: block; }
+
+.sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-width: 760px;
+  margin: 0 auto;
+  max-height: 86dvh;
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 22px 22px 0 0;
+  padding: 18px 18px calc(24px + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -10px 35px rgba(0, 0, 0, 0.25);
+  z-index: 100;
+  display: none;
+}
+.sheet.open { display: block; }
+.sheet-cat {
+  display: inline-block;
+  background: var(--c);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+.sheet h2 {
+  margin: 8px 0 4px;
+  font-size: 19px;
+  line-height: 1.3;
+}
+.sheet-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: var(--sub);
+  margin-bottom: 12px;
+}
+
+/* VOICEOVER PLAYER */
+.vo-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.vo-play {
+  min-height: 40px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 0;
+  background: var(--text);
+  color: #fff;
+  font-size: 13.5px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+.vo-upload {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--nav);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* PHOTO SLOTS */
+.photo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 12px 0;
+}
+.photo-slot {
+  border: 1.5px dashed #cbd2d9;
+  border-radius: 12px;
+  min-height: 112px;
+  background: var(--surface);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 12px;
+  color: var(--sub);
+}
+.photo-slot img {
+  width: 100%;
+  height: 105px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.photo-slot label {
+  margin-top: 5px;
+  color: var(--nav);
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.key-box {
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin: 12px 0;
+  font-weight: 700;
+  font-size: 14px;
+  background: color-mix(in srgb, var(--c) 12%, #fff);
+  border-left: 4px solid var(--c);
+}
+.approx-note {
+  font-size: 12.5px;
+  color: var(--sub);
+  background: var(--surface);
+  padding: 8px 10px;
+  border-radius: 10px;
+}
+
+/* PAYWALL & MEMBER MODAL */
+.plan-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 14px 0;
+}
+.plan-card {
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  padding: 12px;
+  background: #fff;
+}
+.plan-card.featured {
+  border-color: var(--text);
+  background: var(--surface);
+}
+.plan-price {
+  font-size: 18px;
+  font-weight: 800;
+  margin: 4px 0;
+}
+.form-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+.form-row input {
+  flex: 1;
+  min-height: 44px;
+  padding: 0 12px;
+  border-radius: 12px;
+  border: 1.5px solid var(--border);
+  font-size: 14px;
+}
+
+@media (max-width: 520px) {
+  .plan-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
 <body>
-<header><h1>Ziarah Jalan Kaki · Sekitar Masjid Nabawi</h1><p>Tur mandiri ±2 jam · jelajah bebas sesuai arah langkahmu</p></header>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#" class="brand">
+      <span class="brand-mark">◈</span>
+      <span>Jejak Sirah</span>
+    </a>
+
+    <nav class="loc-nav" aria-label="Pilih kawasan">
+      <button class="loc-btn active" data-area="nabawi">Masjid Nabawi</button>
+      <button class="loc-btn soon" data-area="haram">Masjidil Haram</button>
+      <button class="loc-btn soon" data-area="quba">Masjid Quba</button>
+    </nav>
+
+    <button class="member-btn" id="btnMember">Masuk Member</button>
+  </div>
+</header>
+
 <main>
-<div id="view"><div class="fabs"><button class="fab" id="fTilt">Miring</button><button class="fab" id="fCtr">Pusatkan</button><button class="fab" id="fIn" aria-label="Perbesar">+</button><button class="fab" id="fOut" aria-label="Perkecil">−</button></div>
-<div id="plane"></div></div>
-<div class="bar"><button class="pill" id="bGps">Aktifkan lokasi</button><button class="pill" id="bCmp">Aktifkan kompas</button><button class="pill" id="bSim">Mode simulasi</button></div>
-<div id="sim"><span>Arah hadap</span><input id="hd" type="range" min="0" max="359" value="0" aria-label="Arah hadap simulasi"><b id="hdv">0°</b>
-<div class="pad"><span></span><button data-n="0,-1" aria-label="Utara">▲</button><span></span><button data-n="-1,0" aria-label="Barat">◀</button><button data-n="0,1" aria-label="Selatan">▼</button><button data-n="1,0" aria-label="Timur">▶</button></div></div>
-<div id="status" aria-live="polite">Ketuk pin mana saja untuk membaca. Aktifkan lokasi &amp; kompas, atau pakai mode simulasi (ketuk peta atau tombol panah untuk berpindah). Geser peta untuk menjelajah.</div>
-<div class="chips" id="chips" role="group" aria-label="Filter segmen"></div>
-<ul id="list"></ul>
-<div class="note"><b>Catatan penting:</b> panduan ini tidak mencakup akses masuk ke Raudhah, kecuali sesuai jadwal/izin resmi masing-masing jamaah. Posisi pin bersifat ilustratif dan perlu disesuaikan di lapangan.
-<div class="tools"><button class="pill" id="bCopy">Salin koordinat (JSON)</button></div></div>
+  <div class="hero-bar">
+    <div>
+      <h1>Peta Sejarah Sekitar Masjid Nabawi</h1>
+      <p>Jelajah bebas di pelataran hingga batas ujung perhotelan</p>
+    </div>
+  </div>
+
+  <!-- INTERACTIVE MAP -->
+  <div id="mapWrap">
+    <div class="map-top-left">
+      <button class="fab active-btn" id="btnMapDefault">Peta</button>
+      <button class="fab" id="btnMapSat">Satelit</button>
+      <label class="fab" id="lblUploadSat" style="display:none;cursor:pointer">
+        Ganti Satelit
+        <input type="file" id="inpSatFile" accept="image/*" hidden>
+      </label>
+    </div>
+
+    <div class="map-top-right">
+      <button class="fab icon-only" id="btnFull" title="Layar penuh" aria-label="Layar penuh">⛶</button>
+      <button class="fab icon-only" id="btnCompassView" title="Kompas & sudut miring/datar" aria-label="Kompas dan sudut pandang">
+        <span id="compassNeedle">🧭</span>
+      </button>
+    </div>
+
+    <div class="map-bottom-bar">
+      <button class="fab" id="btnRecenter">◎ Kembali ke Posisi Saya</button>
+      <span style="font-size:11.5px;background:rgba(255,255,255,.92);padding:4px 10px;border-radius:999px;border:1px solid var(--border);color:var(--sub)">
+        Cubit 2 jari untuk perbesar/perkecil
+      </span>
+    </div>
+
+    <div id="plane"></div>
+  </div>
+
+  <!-- SENSORS & SIMULATION -->
+  <div class="control-strip">
+    <button class="pill" id="bGps">Aktifkan Lokasi</button>
+    <button class="pill" id="bCmp">Aktifkan Kompas 360°</button>
+    <button class="pill" id="bSim">Mode Simulasi</button>
+  </div>
+
+  <div id="simPanel">
+    <span>Arah hadap:</span>
+    <input id="hdSlider" type="range" min="0" max="359" value="0" aria-label="Sudut arah hadap">
+    <strong id="hdVal">0°</strong>
+    <div class="dpad">
+      <span></span><button data-mv="0,-1" aria-label="Utara">▲</button><span></span>
+      <button data-mv="-1,0" aria-label="Barat">◀</button>
+      <button data-mv="0,1" aria-label="Selatan">▼</button>
+      <button data-mv="1,0" aria-label="Timur">▶</button>
+    </div>
+  </div>
+
+  <div id="statusBox" aria-live="polite">
+    Ketuk ikon mana saja pada peta untuk membaca sejarahnya, atau aktifkan lokasi &amp; kompas agar peta berputar 360° mengikuti arah hadapmu.
+  </div>
+
+  <!-- CATEGORY FILTER (HIDE/SHOW) -->
+  <div class="section-head">
+    <h2>Tampilkan / Sembunyikan Jenis Sejarah</h2>
+  </div>
+  <div class="cat-toggles" id="catToggles"></div>
+
+  <!-- POINT LIST -->
+  <div class="section-head">
+    <h2>Daftar Titik Sejarah &amp; Pintu Masjid</h2>
+  </div>
+  <ul class="point-list" id="pointList"></ul>
+  <div class="load-more-wrap">
+    <button class="load-more-btn" id="btnLoadMore">Lanjutkan ke bawah</button>
+  </div>
+
+  <!-- FOOTER DISCLAIMER -->
+  <div class="site-note">
+    <strong>Catatan Penting:</strong> Peta ini dirancang sebagai panduan orientasi sejarah di sekitar Masjid Nabawi hingga batas kawasan perhotelan. Untuk rumah-rumah sahabat yang tapaknya telah menyatu dengan perluasan bangunan masjid saat ini, titik pada peta menunjukkan perkiraan arah dan zona historis berdasarkan literatur sirah. Panduan ini tidak mencakup izin atau jadwal masuk ke area Raudhah.
+  </div>
 </main>
-<div id="sheet" role="dialog"></div>
+
+<div class="backdrop" id="backdrop"></div>
+<div class="sheet" id="detailSheet" role="dialog" aria-modal="true"></div>
+<div class="sheet" id="memberSheet" role="dialog" aria-modal="true"></div>
+
 <script>
-const CFG={center:{lat:24.4672,lng:39.6111},span:{lat:0.0072,lng:0.0080},near:7,maxDist:38,cone:44};
-const SEG={1:{n:"Segmen 1 · Barat & Barat Daya",c:"#F59E0B"},2:{n:"Segmen 2 · Rumah Nabi & Sahabat",c:"#E5484D"},3:{n:"Segmen 3 · Masjid, Raudhah & Baqi’",c:"#5B5BD6"}};
-const SIDE={T:"Timur (kiri masjid)",S:"Selatan (depan masjid)",U:"Utara (belakang masjid)",B:"Barat (kanan masjid)"};
-const APPROX="Catatan: posisi di peta adalah perkiraan arah/zona historis berdasarkan literatur sejarah. Banyak tapak rumah sahabat telah menyatu dengan perluasan Masjid Nabawi dan tidak memiliki penanda fisik terpisah saat ini. Perdalam narasi ini dengan rujukan Anda.";
-/* Foto: isi fotoArah / fotoLokasi dengan path (mis. "foto/ghamamah-arah.jpg") atau data URI. */
-const P=[];
-function add(id,seg,side,title,x,y,min,ref,narr,key,approx=true){P.push({id,seg,side,title,x,y,min,ref,narr,key,approx,fotoArah:"",fotoLokasi:""})}
-const H=(id,side,title,x,y,narr,key)=>add(id,2,side,title,x,y,3,"Sisi "+SIDE[side],narr,key);
-/* —— Segmen 1 —— */
-add("saqifah",1,"B","Saqifah Banu Sa’idah – The Site of the First Caliphate Decision",14,24,8,"Barat/barat laut masjid (perkiraan)","Saqifah adalah tempat berkumpul Bani Sa’idah dari kaum Anshar. Menurut riwayat sirah, setelah wafatnya Nabi ﷺ para sahabat Anshar dan Muhajirin bermusyawarah di sini hingga Abu Bakr ash-Shiddiq dibaiat sebagai khalifah pertama. Peristiwa ini penting untuk memahami bagaimana kaum Muslimin menjaga persatuan setelah wafat Nabi ﷺ.","Tempat musyawarah yang berujung pada baiat Abu Bakr.");
-add("manakhah",1,"B","Souq al-Manakhah – The Ancient Market of Madinah",9,62,6,"Barat/barat daya masjid (perkiraan)","Al-Manakhah dikenal sebagai kawasan pasar dan tempat singgah unta di Madinah. Pada masa Nabi ﷺ, Madinah memiliki pasar sebagai pusat ekonomi kaum Muslimin. Letak persis dan riwayat rinci pasar ini perlu Anda cocokkan dengan literatur sebelum dipakai sebagai narasi final.","Pasar lama Madinah, pusat jual beli kaum Muslimin.");
-add("musalla",1,"B","Al-Musalla – A Place of Prophetic Prayers",22,66,6,"Barat daya masjid (perkiraan)","Musalla berarti tempat shalat. Dalam riwayat, Nabi ﷺ shalat di beberapa titik di luar masjid, termasuk shalat Id di tanah lapang. Titik pasti “Al-Musalla” versi tur ini perlu dicocokkan dengan sumber pembimbing Anda.","Tempat shalat di luar masjid yang dikaitkan dengan Nabi ﷺ.");
-const mus=(id,title,x,y,who,desc)=>add(id,1,"B",title,x,y,6,"Barat daya masjid (perkiraan)",`Menurut tradisi setempat, musalla ini dinisbatkan kepada ${who}. ${desc} Penisbatan ini bersumber dari tradisi/literatur lokasi sejarah Madinah dan bukan penetapan yang pasti; bangunan yang berdiri sekarang adalah bangunan belakangan.`,`Musalla yang dinisbatkan kepada ${who}.`);
-mus("m-ali","Masjid Ali ibn Abi Talib (Musalla) – A Place of Worship & History",14,72,"sahabat Ali ibn Abi Thalib","Ia adalah sepupu sekaligus menantu Nabi ﷺ dan khalifah keempat.");
-mus("m-abubakr","Masjid Abu Bakr as-Siddiq (Musalla) – A Site of Prayer",20,79,"sahabat Abu Bakr ash-Shiddiq","Ia adalah sahabat terdekat Nabi ﷺ dan khalifah pertama.");
-add("ghamamah",1,"B","Masjid al-Ghamamah – A Mosque of Barakah",28,74,8,"Barat daya masjid, tidak jauh dari plaza","Menurut riwayat, Nabi ﷺ pernah shalat Id di area ini, dan tempat ini dikaitkan pula dengan shalat istisqa’ (memohon hujan). “Ghamamah” berarti awan. Bangunan yang tampak sekarang adalah bangunan belakangan di lokasi yang dikenal tersebut.","Masjid yang dikenal karena riwayat shalat Id Nabi ﷺ.",false);
-mus("m-umar","Masjid Umar ibn al-Khattab (Musalla) – A Legacy of Leadership",31,85,"sahabat Umar ibn al-Khattab","Ia adalah khalifah kedua yang dikenal dengan keadilan dan ketegasannya.");
-/* —— Segmen 2: Timur —— */
-H("r-nabi","T","Rumah-rumah Nabi ﷺ (searah lurusan makam Nabi ke belakang; termasuk rumah Fatimah & Ali di belakang rumah Aisyah)",70,48,"Kamar-kamar istri Nabi ﷺ dahulu berada di sisi timur masjid, berdampingan dengannya. Menurut literatur, rumah Fatimah dan Ali berada di belakang rumah Aisyah. Kawasan ini kini menyatu dengan area masjid.","Zona kamar-kamar Nabi ﷺ di sisi timur masjid.");
-H("utsman-s","T","Homes of Uthman ibn Affan Sughra – The Residences of Dhun-Nurayn",76,39,"Utsman ibn Affan dijuluki Dzun-Nurain karena menikahi dua putri Nabi ﷺ, Ruqayyah dan Ummu Kultsum. Rumah beliau disebut dalam literatur dalam dua kawasan, yaitu Sughra dan Kubra.","Rumah sahabat Dzun-Nurain, bagian Sughra.");
-H("utsman-k","T","Homes of Uthman ibn Affan Kubra – The Residences of Dhun-Nurayn",81,46,"Bagian Kubra dari kediaman Utsman ibn Affan, khalifah ketiga yang dikenal dermawan. Lokasinya mengikuti penyebutan literatur sejarah Madinah.","Rumah sahabat Dzun-Nurain, bagian Kubra.");
-H("abubakr-h","T","House of Abu Bakr as-Siddiq – A Home of Faith & Loyalty",81,56,"Abu Bakr ash-Shiddiq adalah sahabat terdekat Nabi ﷺ, ayah Aisyah, dan khalifah pertama. Rumah ini dikaitkan dengan kawasan di sisi timur masjid menurut daftar tur.","Rumah sahabat yang paling setia kepada Nabi ﷺ.");
-H("jablah","T","House of Jablah ibn Amr al-Ansari",87,42,"Jablah ibn Amr al-Anshari adalah sahabat dari kaum Anshar. Riwayat rinci tentang rumahnya perlu Anda lengkapi dari literatur.","Rumah sahabat Anshar di sisi timur.");
-H("khalid","T","House of Khalid ibn Walid",88,52,"Khalid ibn Walid adalah sahabat yang dikenal sebagai panglima perang yang digelari Saifullah (pedang Allah). Penentuan zona rumahnya mengikuti literatur sejarah.","Rumah panglima Saifullah.");
-H("amr","T","House of Amr ibn ‘Ash",86,62,"Amr ibn ‘Ash adalah sahabat yang dikenal memimpin pembebasan Mesir pada masa Umar. Zona rumahnya di peta adalah perkiraan.","Rumah sahabat penakluk Mesir.");
-/* —— Segmen 2: Selatan —— */
-H("abuayyub","S","House of Abu Ayyub al-Ansari – The Prophet’s First Residence",46,73,"Setelah hijrah, Nabi ﷺ pertama kali singgah di rumah Abu Ayyub al-Anshari sebelum masjid dan kamar-kamar beliau selesai dibangun. Kisah ini termasuk yang paling dikenal dalam sirah hijrah.","Tempat singgah pertama Nabi ﷺ di Madinah.");
-H("haritsah","S","House of Haritsah ibn Nu’man",54,75,"Haritsah ibn Nu’man adalah sahabat Anshar yang dikenal menyerahkan rumah-rumahnya untuk dipakai Nabi ﷺ dan keluarganya. Letaknya dalam daftar ini merupakan perkiraan zona.","Sahabat Anshar yang memberikan rumahnya untuk Nabi ﷺ.");
-H("umar-fam","S","Rumah keluarga Umar (Abdullah bin Umar)",62,72,"Abdullah bin Umar adalah putra Umar ibn al-Khattab dan salah satu sahabat yang banyak meriwayatkan hadits. Zona rumah keluarga ini mengikuti daftar tur.","Rumah keluarga Umar, putra beliau Abdullah.");
-H("abbas","S","House of Abbas ibn Abd al-Muttalib – The Home of the Prophet’s Uncle",42,82,"Al-Abbas adalah paman Nabi ﷺ. Rumahnya dikenal dalam literatur sejarah Madinah di dekat masjid; letak persisnya perlu Anda verifikasi.","Rumah paman Nabi ﷺ.");
-H("hasan-z","S","Rumah Hasan ibn Zaid",68,80,"Identitas dan riwayat rinci tokoh ini perlu Anda isi dari literatur sebelum narasi dipakai di lapangan.","Zona rumah Hasan ibn Zaid.");
-H("saad","S","Rumah Sa’d ibn Abi Waqqash",52,85,"Sa’d ibn Abi Waqqash adalah salah satu sahabat yang dikabarkan masuk surga dan dikenal sebagai pemanah handal. Letak rumahnya adalah perkiraan zona.","Rumah sahabat yang dijamin surga.");
-H("jafar","S","Rumah Ja’far ibn Abi Thalib",60,88,"Ja’far ibn Abi Thalib adalah sepupu Nabi ﷺ yang ikut hijrah ke Habasyah dan gugur dalam perang Mu’tah. Zona rumahnya di peta adalah perkiraan.","Rumah sepupu Nabi ﷺ yang syahid di Mu’tah.");
-/* —— Segmen 2: Utara —— */
-H("abdurrahman","U","Rumah Abdurrahman ibn Auf",40,22,"Abdurrahman ibn Auf adalah sahabat yang dikenal sebagai saudagar dermawan dan termasuk yang dikabarkan masuk surga. Letak rumahnya adalah perkiraan zona.","Rumah saudagar dermawan dari kalangan sahabat.");
-H("ibnmasud","U","Rumah Abdullah ibn Mas’ud",50,17,"Abdullah ibn Mas’ud adalah sahabat yang dikenal sebagai ahli Al-Qur’an. Zona rumahnya mengikuti daftar tur.","Rumah sahabat ahli Al-Qur’an.");
-H("utbah","U","Rumah ‘Utbah ibn Mas’ud",60,23,"‘Utbah ibn Mas’ud adalah saudara Abdullah ibn Mas’ud. Riwayat rinci tentang rumahnya perlu Anda lengkapi.","Zona rumah saudara Ibn Mas’ud.");
-/* —— Segmen 2: Barat —— */
-H("umar-h","B","Rumah Umar ibn Khattab",31,46,"Umar ibn al-Khattab adalah khalifah kedua. Zona rumahnya di sisi barat masjid adalah perkiraan.","Rumah khalifah kedua.");
-H("abubakar-b","B","Rumah Abu Bakar as-Siddiq",25,52,"Zona rumah Abu Bakr ash-Shiddiq di sisi barat menurut daftar tur. Daftar tur juga memuat rumah beliau di sisi timur; periksa kembali dengan sumber Anda.","Zona rumah Abu Bakr di sisi barat.");
-H("nawfal","B","Rumah Nawfal ibn Harits",19,43,"Nawfal ibn al-Harits adalah sepupu Nabi ﷺ dari pihak keluarga Bani Hasyim. Letak rumahnya adalah perkiraan zona.","Rumah sepupu Nabi ﷺ.");
-H("thalhah","B","Rumah Thalhah ibn Ubaidillah",31,34,"Thalhah ibn Ubaidillah adalah salah satu sahabat yang dikabarkan masuk surga. Zona rumahnya di peta adalah perkiraan.","Rumah sahabat yang dijamin surga.");
-H("zubair","B","Rumah Zubair ibn Awwam",24,37,"Az-Zubair ibn al-Awwam adalah sahabat dekat Nabi ﷺ dan termasuk yang dikabarkan masuk surga. Zona rumahnya adalah perkiraan.","Rumah sahabat penolong Nabi ﷺ.");
-H("tamim","B","Rumah Tamim ad-Dari",15,38,"Tamim ad-Dari adalah sahabat yang masuk Islam setelah hijrah. Riwayat rinci rumahnya perlu Anda lengkapi.","Zona rumah Tamim ad-Dari.");
-H("hassan","B","Rumah Hassan ibn Tsabit",17,48,"Hassan ibn Tsabit adalah sahabat Anshar yang dikenal sebagai penyair Nabi ﷺ. Letak rumahnya adalah perkiraan zona.","Rumah penyair Nabi ﷺ.");
-H("ammar","B","Rumah Ammar ibn Yasir",30,58,"Ammar ibn Yasir adalah sahabat yang masuk Islam di masa awal dan mengalami penyiksaan di Makkah bersama keluarganya. Zona rumahnya adalah perkiraan.","Rumah sahabat yang teguh dalam ujian.");
-H("abusufyan","B","Rumah Abu Sufyan",11,53,"Abu Sufyan ibn Harb masuk Islam menjelang Fathu Makkah. Letak rumahnya di peta adalah perkiraan zona.","Zona rumah Abu Sufyan.");
-/* —— Segmen 3 —— */
-add("s-masjid",3,"T","History of Al-Masjid an-Nabawi – From a Simple Structure to a Grand Mosque",44,50,8,"Berdiri di plaza, menghadap bangunan masjid","Masjid ini dibangun Nabi ﷺ setelah hijrah dengan bahan sederhana seperti batang kurma. Ia kemudian diperluas pada masa Nabi ﷺ, para khalifah, dan penguasa-penguasa berikutnya hingga perluasan besar pada era modern. Isi tahun dan rincian tiap perluasan dari rujukan Anda.","Dari bangunan sederhana menjadi masjid yang sangat luas.",false);
-add("s-aisyah",3,"T","History of the House of Aishah – The Prophet’s ﷺ Sacred Chambers",58,47,6,"Sisi timur masjid, dekat kubah hijau","Kamar Aisyah berdampingan dengan masjid. Setelah Nabi ﷺ wafat, beliau dimakamkan di kamar tersebut, kemudian Abu Bakr dan Umar radhiyallahu ‘anhuma dimakamkan di sisi beliau. Area ini kini berada dalam bangunan masjid dan tidak bisa dimasuki peziarah.","Kamar Aisyah kini menjadi tempat makam Nabi ﷺ.",false);
-add("s-kubah",3,"T","History of the Domes – The Evolution of Masjid Nabawi’s Architecture",60,54,6,"Tengok ke arah kubah hijau di sisi tenggara masjid","Kubah di atas area makam Nabi ﷺ dibangun jauh setelah masa Nabi ﷺ dan mengalami beberapa kali pembangunan ulang serta pengecatan. Masjid juga memiliki berbagai kubah dan menara dari periode berbeda. Isi urutan tahun dan penguasanya dari sumber Anda.","Arsitektur masjid berkembang lintas masa.",false);
-add("s-raudhah",3,"T","History of the Riyadhul Jannah & Its Pillars – (The tour does not allow access into the Rawdha)",52,56,6,"Antara area kamar Nabi ﷺ dan mimbar (dilihat dari luar)","Riyadhul Jannah (Raudhah) adalah area antara rumah Nabi ﷺ dan mimbar beliau, yang disebut dalam hadits sebagai salah satu taman dari taman-taman surga. Beberapa tiangnya dikenal dengan nama dan riwayat tertentu. Tur ini hanya membahas sejarahnya dan tidak mencakup akses masuk ke Raudhah.","Raudhah dibahas sebagai sejarah, tanpa akses masuk dalam tur ini.",false);
-add("s-baqi",3,"T","History of al-Baqi’ – The Cemetery of Madinah",84,70,10,"Sisi timur/tenggara masjid, di luar plaza (perkiraan)","Al-Baqi’ adalah pemakaman utama Madinah. Menurut riwayat, banyak sahabat dan keluarga Nabi ﷺ dimakamkan di sini, di antaranya Utsman ibn Affan. Adab ziarah kubur berlaku; periksa waktu buka dan aturan resmi sebelum berkunjung.","Pemakaman utama Madinah bagi para sahabat dan keluarga Nabi ﷺ.",false);
-
-
-/* ===== PETA 2.5D ===== */
-const $=s=>document.querySelector(s);
-let flt="all",me=null,hdg=0,sim=false,gps=false,wid=null,moveId=null,det=[],loc={},tilt=true,zoom=1.7,follow=false,S=360,cam={x:50,y:50},dragged=false,dg=null;
-const view=$("#view"),plane=$("#plane"),root=document.documentElement,cl=v=>Math.max(0,Math.min(100,v));
-const hit=p=>flt==="all"||(flt==="3"?p.seg===3:flt==="1"?p.seg===1:(p.seg===2&&p.side===flt));
-const CH=[["all","Semua"],["1","Barat & Barat Daya"],["T","Rumah · Timur"],["S","Rumah · Selatan"],["U","Rumah · Utara"],["B","Rumah · Barat"],["3","Masjid & Baqi’"]];
-const short=p=>p.title.split(" – ")[0].replace(/^(House of|Homes of|Rumah|History of)\s+/,"");
-function applyCam(){
- S=Math.max(view.clientWidth,320);const t=tilt?58:0;
- root.style.setProperty("--s",S+"px");root.style.setProperty("--t",t+"deg");root.style.setProperty("--z",zoom);
- plane.style.transform=`rotateX(${t}deg) scale(${zoom}) translate(${-(cam.x-50)/100*S}px,${-(cam.y-50)/100*S}px)`;
-}
-function build(){
- plane.innerHTML=`<svg viewBox="0 0 100 100" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none">
- <rect x="6" y="8" width="88" height="84" rx="5" fill="#fff" stroke="#9AA1AB" stroke-width=".5" stroke-dasharray="2 1.4"/>
- <rect x="26" y="28" width="48" height="44" rx="3" fill="#F5F6F8"/>
- <g fill="none" stroke-linecap="round"><path d="M50 8V92M6 50H94M26 28H74V72H26Z M14 24V80M86 30V74" stroke="#DADFE6" stroke-width="2.4"/><path d="M50 8V92M6 50H94M26 28H74V72H26Z M14 24V80M86 30V74" stroke="#fff" stroke-width="1.6"/></g>
- <text x="50" y="6.3" font-size="2.2" text-anchor="middle" fill="#5A6068">batas ujung area perhotelan</text></svg>`;
- for(let i=0;i<6;i++){const d=document.createElement("div");d.className="mq"+(i===5?" mqt":"");d.style.transform=`translateZ(${i*3}px)`;d.style.background=i===5?"#111315":"#8A9099";if(i===5)d.textContent="Masjid Nabawi";plane.appendChild(d)}
- [["U",50,10],["S",50,90],["T",91,50],["B",9,50]].forEach(([l,x,y])=>{const d=document.createElement("div");d.className="bb";d.style.cssText=`left:${x}%;top:${y}%`;d.innerHTML=`<div class="cp">${l}</div>`;plane.appendChild(d)});
- P.forEach(p=>{const d=document.createElement("div");d.className="bb";d.style.cssText=`left:${p.x}%;top:${p.y}%;--c:${SEG[p.seg].c}`;
-  d.innerHTML=`<button class="dot" aria-label="${p.title}"></button><span class="tag">${short(p)}</span>`;
-  d.querySelector("button").onclick=e=>{e.stopPropagation();if(dragged)return;openP(p)};plane.appendChild(d);p.el=d});
- const m=document.createElement("div");m.id="me";m.innerHTML=`<div class="cone" id="cone"></div><div class="bb"><div class="av"></div></div>`;plane.appendChild(m);
- paint();applyCam();
-}
-function refresh(){P.forEach(p=>{p.el.classList.toggle("act",!!(p.sel||p.det));p.el.classList.toggle("dim",!hit(p))})}
-function paint(){
- $("#list").innerHTML="";
- P.filter(hit).forEach(p=>{const li=document.createElement("li");li.tabIndex=0;
-  li.innerHTML=`<i style="background:${SEG[p.seg].c}"></i><div>${p.title}<small>${p.seg===2?SIDE[p.side]:SEG[p.seg].n} · ±${p.min} mnt</small></div>`;
-  li.onclick=()=>openP(p);li.onkeydown=e=>{if(e.key==="Enter")openP(p)};$("#list").appendChild(li)});
- refresh();
-}
-$("#chips").innerHTML=CH.map(([k,t])=>`<button class="chip${k===flt?" on":""}" data-k="${k}">${t}</button>`).join("");
-$("#chips").onclick=e=>{const k=e.target.dataset.k;if(!k)return;flt=k;document.querySelectorAll(".chip").forEach(b=>b.classList.toggle("on",b.dataset.k===k));paint()};
-
-/* kamera: toggle, pusatkan, zoom, geser */
-$("#fTilt").onclick=()=>{tilt=!tilt;zoom=tilt?1.7:1;$("#fTilt").textContent=tilt?"Miring":"Datar";applyCam()};
-$("#fCtr").onclick=()=>{follow=true;cam=me?{x:me.x,y:me.y}:{x:50,y:50};applyCam()};
-$("#fIn").onclick=()=>{zoom=Math.min(3,zoom+.25);applyCam()};
-$("#fOut").onclick=()=>{zoom=Math.max(.8,zoom-.25);applyCam()};
-view.addEventListener("pointerdown",e=>{if(e.target.closest(".fab"))return;dg={x:e.clientX,y:e.clientY,cx:cam.x,cy:cam.y}});
-addEventListener("pointermove",e=>{if(!dg)return;const dx=e.clientX-dg.x,dy=e.clientY-dg.y;if(!dragged&&Math.hypot(dx,dy)<8)return;
- dragged=true;follow=false;const k=100/(S*zoom);cam={x:cl(dg.cx-dx*k),y:cl(dg.cy-dy*k/(tilt?Math.cos(58*Math.PI/180):1))};applyCam()});
-addEventListener("pointerup",()=>{dg=null;setTimeout(()=>dragged=false,60)});
-addEventListener("resize",applyCam);
-
-/* ===== DETAIL ===== */
-function slot(p,k,label){
- const src=loc[p.id+k]||p[k];
- return `<div class="slot">${src?`<img src="${src}" alt="${label}">`:`<div><b>[${label}]</b><br>Belum ada foto.</div>`}<label>Pilih foto<input type="file" accept="image/*" hidden data-s="${k}"></label>${src?"":`<span>Tetap: isi <code>${k}</code> pada data titik ini.</span>`}</div>`;
-}
-function openP(p){
- const s=$("#sheet");s.style.display="block";s.style.setProperty("--c",SEG[p.seg].c);
- s.innerHTML=`<span class="badge">${SEG[p.seg].n}${p.seg===2?" · "+SIDE[p.side]:""}</span><h2>${p.title}</h2>
- <p class="meta">⏱ Estimasi ±${p.min} menit · 🧭 ${p.ref}</p>
- <div class="slots">${slot(p,"fotoArah","Foto Patokan Arah Jalan")}${slot(p,"fotoLokasi","Foto Lokasi / Denah")}</div>
- <p>${p.narr}</p><div class="key">${p.key}</div>${p.approx?`<div class="warn">${APPROX}</div>`:""}
- <div class="tools"><button class="pill" id="bMove">Pindahkan pin</button><button class="pill on" id="bX">Tutup</button></div>`;
- s.querySelectorAll("input[type=file]").forEach(i=>i.onchange=()=>{const f=i.files[0];if(f){loc[p.id+i.dataset.s]=URL.createObjectURL(f);openP(p)}});
- $("#bX").onclick=()=>{s.style.display="none";moveId=null;p.sel=false;refresh()};
- $("#bMove").onclick=()=>{moveId=p.id;$("#bMove").textContent="Ketuk peta untuk posisi baru…"};
- P.forEach(q=>q.sel=false);p.sel=true;refresh();
-}
-
-/* ===== POSISI & DETEKSI ===== */
-function setMe(x,y){me={x:cl(x),y:cl(y)};upd()}
-function upd(){
- if(!me)return;
- const m=$("#me");m.style.display="block";m.style.left=me.x+"%";m.style.top=me.y+"%";$("#cone").style.transform=`rotate(${hdg}deg)`;
- det=[];
- P.forEach(p=>{const dx=p.x-me.x,dy=p.y-me.y,d=Math.hypot(dx,dy),b=(Math.atan2(dx,-dy)*180/Math.PI+360)%360;
-  let df=Math.abs(b-hdg);df=df>180?360-df:df;const near=d<=CFG.near,face=d<=CFG.maxDist&&df<=CFG.cone/2;
-  p.det=near||face;if(p.det)det.push({p,d,near})});
- det.sort((a,b)=>a.d-b.d);refresh();
- const st=$("#status");st.innerHTML=det.length?"<b>Terdeteksi di arah hadapmu</b> – ketuk untuk membaca:":"Belum ada titik di arah hadapmu. Semua pin tetap bisa diketuk kapan saja.";
- det.slice(0,3).forEach(({p,near})=>{const b=document.createElement("button");b.className="hit";b.textContent=(near?"Dekat · ":"Di arah hadap · ")+short(p);b.onclick=()=>openP(p);st.appendChild(b)});
- if(follow)cam={x:me.x,y:me.y};applyCam();
-}
-const toMap=(lat,lng)=>[50+(lng-CFG.center.lng)/CFG.span.lng*100,50-(lat-CFG.center.lat)/CFG.span.lat*100];
-$("#bGps").onclick=()=>{
- if(!navigator.geolocation){$("#status").textContent="Perangkat ini tidak mendukung GPS. Pakai mode simulasi.";return}
- if(gps){navigator.geolocation.clearWatch(wid);gps=false;$("#bGps").classList.remove("on");$("#bGps").textContent="Aktifkan lokasi";return}
- gps=true;if(sim){sim=false;setSim()}follow=true;$("#bGps").classList.add("on");$("#bGps").textContent="Lokasi aktif";
- wid=navigator.geolocation.watchPosition(r=>{const[x,y]=toMap(r.coords.latitude,r.coords.longitude);setMe(x,y)},
-  ()=>{$("#status").textContent="Izin lokasi ditolak atau sinyal lemah. Izinkan lokasi di pengaturan browser, atau pakai mode simulasi.";gps=false;$("#bGps").classList.remove("on");$("#bGps").textContent="Aktifkan lokasi"},{enableHighAccuracy:true,maximumAge:2000});
+const CFG = {
+  center: { lat: 24.4672, lng: 39.6111 },
+  span: { lat: 0.0074, lng: 0.0082 },
+  nearDist: 7.5,
+  faceDist: 38,
+  coneAngle: 44
 };
-$("#bCmp").onclick=async()=>{
- try{
-  if(typeof DeviceOrientationEvent!=="undefined"&&DeviceOrientationEvent.requestPermission){if(await DeviceOrientationEvent.requestPermission()!=="granted")throw 0}
-  const h=e=>{let v=e.webkitCompassHeading;if(v==null&&e.alpha!=null&&(e.absolute||e.type==="deviceorientationabsolute"))v=360-e.alpha;if(v!=null&&!sim){hdg=v;upd()}};
-  addEventListener("deviceorientationabsolute",h,true);addEventListener("deviceorientation",h,true);
-  $("#bCmp").classList.add("on");$("#bCmp").textContent="Kompas aktif";
- }catch(e){$("#status").textContent="Izin kompas ditolak atau tidak tersedia. Pakai mode simulasi."}
+
+const CATS = {
+  masjid: { label: "Masjid & Musala", color: "#d97706", free: true },
+  rumah:  { label: "Rumah Nabi & Sahabat", color: "#dc2626", free: false },
+  sejarah:{ label: "Sejarah Masjid & Baqi", color: "#4f46e5", free: true },
+  pintu:  { label: "Pintu & Bab Utama", color: "#059669", free: true }
 };
-function setSim(){$("#bSim").classList.toggle("on",sim);$("#sim").style.display=sim?"flex":"none"}
-$("#bSim").onclick=()=>{sim=!sim;if(sim&&gps)$("#bGps").click();setSim();if(sim){follow=true;hdg=+$("#hd").value;setMe(me?me.x:50,me?me.y:82);$("#status").textContent="Mode simulasi: ketuk peta atau tombol panah untuk berpindah, geser slider untuk memutar arah hadap."}};
-$("#hd").oninput=e=>{hdg=+e.target.value;$("#hdv").textContent=hdg+"°";upd()};
-$("#sim").querySelector(".pad").onclick=e=>{const n=e.target.dataset.n;if(!n||!me)return;const[a,b]=n.split(",").map(Number);setMe(me.x+a*2,me.y+b*2)};
-plane.onclick=e=>{
- if(dragged||e.target!==plane)return;
- const x=Math.round(e.offsetX/plane.clientWidth*1000)/10,y=Math.round(e.offsetY/plane.clientHeight*1000)/10;
- if(moveId){const p=P.find(a=>a.id===moveId);p.x=x;p.y=y;p.el.style.left=x+"%";p.el.style.top=y+"%";moveId=null;openP(p);if(me)upd()}
- else if(sim)setMe(x,y);
+
+const ICONS = {
+  masjid: `<svg viewBox="0 0 24 24"><path d="M4 20h16M6 20v-7a6 6 0 0 1 12 0v7M12 3v4M9 5h6"/></svg>`,
+  rumah:  `<svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>`,
+  sejarah:`<svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>`,
+  pintu:  `<svg viewBox="0 0 24 24"><path d="M5 21V8a7 7 0 0 1 14 0v13M3 21h18M12 13v3"/></svg>`
 };
-$("#bCopy").onclick=()=>{const t=JSON.stringify(Object.fromEntries(P.map(p=>[p.id,[p.x,p.y]])));(navigator.clipboard?navigator.clipboard.writeText(t).then(()=>$("#bCopy").textContent="Tersalin"):Promise.reject()).catch(()=>prompt("Salin koordinat:",t))};
-build();
-</script></body></html>
+
+const APPROX_TEXT = "Keterangan lokasi: Tapak fisik rumah sahabat ini telah menyatu dengan perluasan Masjid Nabawi dan pelatarannya. Posisi pin menunjukkan perkiraan zona historis berdasarkan literatur sejarah.";
+
+/* Data titik: isi properti vo ("audio/nama-file.mp3"), fotoArah, dan fotoLokasi sesuai kebutuhan */
+const POINTS = [];
+function addPoint(id, cat, title, x, y, walkMin, ref, narr, key, opts = {}) {
+  POINTS.push({
+    id, cat, title, x, y, walkMin, ref, narr, key,
+    gateNo: opts.gateNo || "",
+    approx: opts.approx || false,
+    free: opts.free !== undefined ? opts.free : CATS[cat].free,
+    vo: opts.vo || "",
+    fotoArah: opts.fotoArah || "",
+    fotoLokasi: opts.fotoLokasi || ""
+  });
+}
+
+/* 1. MASJID & MUSALA SEKITAR NABAWI */
+addPoint("saqifah", "masjid", "Saqifah Bani Sa’idah", 16, 25, 4, "Sisi barat laut luar pagar masjid (dekat Bab 15–17)",
+  "Saqifah Bani Sa’idah adalah pelataran berteduh milik klan Bani Sa’idah dari kaum Anshar. Setelah wafatnya Nabi ﷺ, kaum Anshar dan Muhajirin berkumpul dan bermusyawarah di tempat ini hingga akhirnya disepakati pembaiatan Abu Bakar ash-Shiddiq sebagai khalifah pertama.",
+  "Tonggak musyawarah persatuan umat dan lahirnya kekhalifahan pertama.", { free: true });
+
+addPoint("manakhah", "masjid", "Kawasan Pasar Al-Manakhah", 12, 58, 5, "Sisi barat luar pelataran masjid",
+  "Al-Manakhah dikenal sebagai kawasan pasar lama dan tempat tambatan unta kafilah di Madinah. Pada masa Nabi ﷺ, pasar menjadi pusat kegiatan ekonomi kaum Muslimin yang diatur dengan prinsip kejujuran dan larangan kecurangan.",
+  "Pusat kegiatan niaga dan sejarah ekonomi masyarakat Madinah.", { free: true });
+
+addPoint("musalla", "masjid", "Kawasan Al-Musalla", 23, 66, 4, "Plaza barat daya Masjid Nabawi",
+  "Al-Musalla adalah tanah lapang di barat daya masjid yang pada masa Nabi ﷺ digunakan untuk melaksanakan salat Id dan salat jenazah. Kawasan ini menjadi cikal bakal berdirinya beberapa masjid bersejarah di sekitarnya.",
+  "Lapangan terbuka tempat pelaksanaan salat Id pada masa Nabi ﷺ.", { free: true });
+
+addPoint("m-ali", "masjid", "Masjid Ali bin Abi Thalib (Musala)", 15, 71, 3, "Sisi barat daya (sebelah barat Masjid al-Ghamamah)",
+  "Masjid ini berdiri di kawasan Al-Musalla dan dalam tradisi sejarah Madinah dinisbatkan kepada Ali bin Abi Thalib, sepupu sekaligus menantu Nabi ﷺ dan khalifah keempat. Bangunan yang terlihat sekarang merupakan pemugaran pada masa-masa berikutnya.",
+  "Penanda tradisi lokasi salat yang dinisbatkan kepada Khalifah Ali bin Abi Thalib.", { free: true });
+
+addPoint("m-abubakr", "masjid", "Masjid Abu Bakar ash-Shiddiq (Musala)", 20, 77, 3, "Barat daya Masjid Nabawi, dekat Masjid al-Ghamamah",
+  "Terletak di bagian barat daya pelataran, musala ini dalam sejarah lokal Madinah dikaitkan dengan Abu Bakar ash-Shiddiq, sahabat terdekat Nabi ﷺ dan khalifah pertama.",
+  "Jejak penamaan musala untuk mengenang Khalifah Abu Bakar ash-Shiddiq.", { free: true });
+
+addPoint("ghamamah", "masjid", "Masjid al-Ghamamah", 27, 74, 4, "Plaza barat daya Masjid Nabawi",
+  "Masjid al-Ghamamah menandai lokasi tempat Nabi ﷺ melaksanakan salat Id dan salat istisqa’ (memohon hujan). Nama Al-Ghamamah berarti awan, merujuk pada riwayat awan yang menaungi saat doa dipanjatkan.",
+  "Lokasi salat Id dan salat istisqa’ Rasulullah ﷺ di kawasan Al-Musalla.", { free: true });
+
+addPoint("m-umar", "masjid", "Masjid Umar bin al-Khattab (Musala)", 30, 84, 4, "Sisi selatan-barat daya Masjid Nabawi",
+  "Berada tidak jauh di sebelah selatan Masjid al-Ghamamah, musala ini dinisbatkan kepada Khalifah Umar bin al-Khattab sebagai bagian dari rangkaian penanda sejarah di kawasan Al-Musalla.",
+  "Penanda historis di kawasan Al-Musalla yang dikaitkan dengan Khalifah Umar.", { free: true });
+
+/* 2. PINTU & BAB UTAMA MASJID NABAWI */
+addPoint("bab-salam", "pintu", "Bab as-Salam (Pintu 1)", 64, 63, 2, "Sisi barat daya/selatan bangunan lama",
+  "Bab as-Salam adalah pintu bersejarah yang menjadi jalur utama peziarah masuk menuju arah Raudhah dan melewati depan makam Nabi ﷺ serta dua sahabatnya untuk mengucapkan salam. Penamaan dan letaknya dipertahankan dalam setiap perluasan masjid.",
+  "Jalur masuk utama peziarah untuk menyampaikan salam ke hadapan makam Nabi ﷺ.", { gateNo: "Bab 1", free: true });
+
+addPoint("bab-baqi", "pintu", "Bab al-Baqi’ (Pintu 41)", 66, 56, 2, "Sisi tenggara masjid menghadap pemakaman Baqi’",
+  "Bab al-Baqi’ berada di sisi timur/tenggara yang langsung menghadap ke arah pemakaman Al-Baqi’. Pintu ini menjadi akses penting jamaah yang keluar setelah salat menuju area Baqi’.",
+  "Akses sisi tenggara masjid yang menghadap langsung ke pemakaman Al-Baqi’.", { gateNo: "Bab 41", free: true });
+
+addPoint("bab-jibril", "pintu", "Bab Jibril (Pintu 40)", 66, 50, 2, "Sisi timur bangunan lama masjid",
+  "Bab Jibril merupakan salah satu pintu bersejarah di sisi timur Masjid Nabawi. Dalam riwayat sirah, nama ini dikaitkan dengan kedatangan Malaikat Jibril kepada Nabi ﷺ di sekitar sisi timur masjid.",
+  "Salah satu pintu klasik di sisi timur yang lekat dengan riwayat sirah Nabi ﷺ.", { gateNo: "Bab 40", free: true });
+
+addPoint("bab-nisa", "pintu", "Bab an-Nisa’ (Pintu 38)", 66, 44, 2, "Sisi timur masjid (utara Bab Jibril)",
+  "Bab an-Nisa’ adalah pintu bersejarah di sisi timur masjid yang sejak masa Khalifah Umar bin al-Khattab dikhususkan sebagai akses masuk bagi jamaah perempuan agar lebih tertib dan nyaman.",
+  "Pintu bersejarah di sisi timur yang dikhususkan untuk akses jamaah perempuan.", { gateNo: "Bab 38", free: true });
+
+addPoint("bab-fahd", "pintu", "Bab al-Malik Fahd (Pintu 21)", 50, 31, 3, "Gerbang utama sisi utara masjid",
+  "Bab al-Malik Fahd merupakan gerbang megah di sisi utara (belakang) Masjid Nabawi yang dibangun pada perluasan besar era modern. Gerbang ini menjadi pintu utama jamaah dari arah perhotelan utara.",
+  "Gerbang utama sisi utara dari perluasan besar era modern Masjid Nabawi.", { gateNo: "Bab 21", free: true });
+
+addPoint("bab-abdulaziz", "pintu", "Bab al-Malik Abdul Aziz (Pintu 3)", 45, 65, 3, "Sisi selatan (arah kiblat)",
+  "Terletak di sisi selatan (arah kiblat), gerbang ini merupakan salah satu pintu utama dari perluasan era Saudi pertama dan modern yang menjadi patokan orientasi jamaah di pelataran selatan.",
+  "Gerbang utama di sisi selatan yang menjadi patokan arah kiblat dan pelataran depan.", { gateNo: "Bab 3", free: true });
+
+/* 3. SEJARAH MASJID, KAMAR NABI, KUBAH, RAUDHAH & BAQI */
+addPoint("s-masjid", "sejarah", "Sejarah Perkembangan Masjid Nabawi", 46, 50, 3, "Pelataran tengah menghadap bangunan utama",
+  "Dibangun oleh Nabi ﷺ bersama para sahabat setelah hijrah dengan konstruksi sederhana dari bata tanah liat dan pelepah kurma. Masjid ini kemudian mengalami perluasan bertahap sejak masa Nabi ﷺ, Khulafaur Rasyidin, Dinasti Umayyah, Abbasiyah, Mamluk, Utsmaniyah, hingga perluasan modern saat ini.",
+  "Transformasi bertahap dari masjid sederhana masa hijrah menjadi kompleks raksasa.", { free: true });
+
+addPoint("s-aisyah", "sejarah", "Sejarah Rumah Aisyah (Hujrah Nabawiyah)", 61, 55, 2, "Sisi tenggara di bawah Kubah Hijau",
+  "Kamar Aisyah radhiyallahu ‘anha berada tepat di sisi timur masjid. Di kamar inilah Rasulullah ﷺ wafat dan dimakamkan, kemudian disusul oleh Abu Bakar ash-Shiddiq dan Umar bin al-Khattab. Kini area ini tertutup dinding pelindung di dalam masjid.",
+  "Kediaman Aisyah yang menjadi tempat dimakamkannya Rasulullah ﷺ, Abu Bakar, dan Umar.", { free: true });
+
+addPoint("s-kubah", "sejarah", "Sejarah Kubah Hijau & Arsitektur Kubah", 61, 59, 2, "Terlihat jelas dari pelataran tenggara & timur",
+  "Kubah di atas Hujrah Nabawiyah pertama kali dibangun berabad-abad setelah masa Nabi ﷺ pada era Sultan Qalawun, lalu diperbarui dan dicat hijau pada era Utsmaniyah. Kubah ini menjadi penanda visual utama lokasi makam Nabi ﷺ dari kejauhan.",
+  "Penanda visual Hujrah Nabawiyah yang berkembang dalam sejarah arsitektur Islam.", { free: true });
+
+addPoint("s-raudhah", "sejarah", "Sejarah Raudhah & Pilar-Pilar Bersejarah", 55, 56, 3, "Antara Hujrah Nabawiyah dan Mimbar Nabi ﷺ",
+  "Raudhah adalah area mulia di antara rumah Nabi ﷺ dan mimbar beliau yang disebut dalam hadits sebagai salah satu taman surga. Di dalamnya terdapat tiang-tiang bersejarah seperti Tiang Aisyah dan Tiang Taubah. Catatan: panduan ini tidak mencakup akses masuk ke Raudhah.",
+  "Area istimewa antara rumah dan mimbar Nabi ﷺ beserta jejak tiang-tiang bersejarahnya.", { free: true });
+
+addPoint("s-baqi", "sejarah", "Sejarah Pemakaman Al-Baqi’", 83, 60, 5, "Sisi tenggara di luar pelataran timur Masjid Nabawi",
+  "Jannatul Baqi’ adalah pemakaman utama penduduk Madinah sejak masa Nabi ﷺ. Ribuan sahabat, istri-istri Nabi ﷺ, putri-putri beliau, serta Khalifah Utsman bin Affan dimakamkan di kawasan ini.",
+  "Pemakaman utama Madinah tempat peristirahatan keluarga dan para sahabat Nabi ﷺ.", { free: true });
+
+/* 4. RUMAH NABI & SAHABAT (MEMBER) */
+const addRumah = (id, title, x, y, sideText, narr, key) =>
+  addPoint(id, "rumah", title, x, y, 3, sideText, narr, key, { approx: true, free: false });
+
+/* Sebelah Kiri Masjid (Timur) */
+addRumah("r-nabi", "Rumah-Rumah Nabi ﷺ & Rumah Fatimah–Ali", 69, 51, "Sebelah kiri masjid (Timur, searah lurusan makam ke belakang)",
+  "Kamar-kamar istri Nabi ﷺ berderet di sisi timur masjid. Di belakang kamar Aisyah terdapat rumah Fatimah az-Zahra dan Ali bin Abi Thalib, yang sering dikunjungi Nabi ﷺ sebelum bepergian maupun sepulang safar.",
+  "Deretan kediaman keluarga Nabi ﷺ di sisi timur yang menyatu dengan perluasan masjid.");
+addRumah("r-utsman-s", "Rumah Utsman bin Affan (Sughra)", 74, 42, "Sebelah kiri masjid (Timur)",
+  "Kediaman pertama Utsman bin Affan radhiyallahu ‘anhu di dekat masjid sebelum perluasan. Utsman dikenal sebagai Dzun-Nurain karena menikahi dua putri Nabi ﷺ, Ruqayyah dan Ummu Kultsum.",
+  "Kediaman awal Khalifah Utsman bin Affan di sisi timur masjid.");
+addRumah("r-utsman-k", "Rumah Utsman bin Affan (Kubra)", 79, 47, "Sebelah kiri masjid (Timur)",
+  "Kediaman Utsman bin Affan yang lebih luas di sisi timur masjid. Di rumah inilah peristiwa pengepungan dan wafatnya Utsman sebagai syahid terjadi pada akhir masa kekhalifahannya.",
+  "Kediaman besar Khalifah Utsman bin Affan di sisi timur kawasan masjid.");
+addRumah("r-abubakr-t", "Rumah Abu Bakar ash-Shiddiq (Sisi Timur)", 78, 56, "Sebelah kiri masjid (Timur)",
+  "Salah satu kediaman yang dikaitkan dengan keluarga Abu Bakar ash-Shiddiq di sisi timur masjid, dekat dengan kamar putrinya, Aisyah radhiyallahu ‘anha.",
+  "Zona kediaman sahabat terdekat Nabi ﷺ di sisi timur.");
+addRumah("r-jablah", "Rumah Jablah bin Amr al-Anshari", 85, 41, "Sebelah kiri masjid (Timur)",
+  "Kediaman sahabat Anshar Jablah bin Amr di kawasan timur masjid yang menjadi bagian dari permukiman sahabat di sekitar pusat kota Madinah.",
+  "Jejak permukiman sahabat Anshar di sisi timur masjid.");
+addRumah("r-khalid", "Rumah Khalid bin Walid", 86, 51, "Sebelah kiri masjid (Timur)",
+  "Zona kediaman panglima Islam Khalid bin Walid (Saifullah) di sisi timur kawasan Masjid Nabawi berdasarkan pemetaan literatur sejarah Madinah.",
+  "Zona kediaman panglima Saifullah, Khalid bin Walid.");
+addRumah("r-amr", "Rumah Amr bin al-Ash", 84, 62, "Sebelah kiri masjid (Timur)",
+  "Zona kediaman sahabat Amr bin al-Ash di sisi timur/tenggara masjid yang dikenal perannya dalam diplomasi dan pembebasan wilayah Mesir.",
+  "Zona permukiman sahabat Amr bin al-Ash di sisi timur.");
+
+/* Sebelah Depan Masjid (Selatan) */
+addRumah("r-abuayyub", "Rumah Abu Ayyub al-Anshari", 47, 72, "Sebelah depan masjid (Selatan)",
+  "Rumah pertama yang disinggahi Rasulullah ﷺ setibanya di Madinah saat hijrah selama sekitar tujuh bulan hingga pembangunan masjid dan kamar beliau selesai.",
+  "Tempat persinggahan pertama Nabi ﷺ saat tiba di Madinah.");
+addRumah("r-haritsah", "Rumah Haritsah bin Nu’man", 54, 73, "Sebelah depan masjid (Selatan)",
+  "Haritsah bin Nu’man adalah sahabat Anshar yang memiliki beberapa rumah di sekitar masjid dan berulang kali merelakannya untuk kebutuhan tempat tinggal keluarga Nabi ﷺ.",
+  "Sahabat dermawan yang menyerahkan rumah-rumahnya demi keluarga Nabi ﷺ.");
+addRumah("r-abdullah-umar", "Rumah Keluarga Umar (Abdullah bin Umar)", 61, 71, "Sebelah depan masjid (Selatan)",
+  "Zona kediaman keluarga Umar bin al-Khattab dan putranya, Abdullah bin Umar, salah satu sahabat utama yang paling tekun menjaga sunnah dan meriwayatkan hadits.",
+  "Zona kediaman keluarga Umar dan Abdullah bin Umar di sisi selatan.");
+addRumah("r-abbas", "Rumah Abbas bin Abdul Muththalib", 41, 79, "Sebelah depan masjid (Selatan)",
+  "Kediaman paman Nabi ﷺ, Al-Abbas bin Abdul Muththalib, di sisi selatan masjid. Rumah ini memiliki sejarah penting dalam perluasan masjid pada masa Khalifah Umar dan Utsman.",
+  "Kediaman paman Nabi ﷺ yang tapaknya masuk dalam perluasan masjid.");
+addRumah("r-hasan-zaid", "Rumah Hasan bin Zaid", 66, 78, "Sebelah depan masjid (Selatan)",
+  "Zona kediaman Hasan bin Zaid (cucu Al-Hasan bin Ali) di sisi selatan kawasan Masjid Nabawi menurut catatan sejarah permukiman Ahlul Bait di Madinah.",
+  "Jejak permukiman keluarga keturunan Al-Hasan bin Ali di sisi selatan.");
+addRumah("r-saad", "Rumah Sa’d bin Abi Waqqash", 51, 82, "Sebelah depan masjid (Selatan)",
+  "Zona kediaman Sa’d bin Abi Waqqash, salah satu dari sepuluh sahabat yang dijamin masuk surga dan pemanah ulung dalam sejarah awal Islam.",
+  "Zona kediaman sahabat yang dijamin surga di sisi selatan.");
+addRumah("r-jafar", "Rumah Ja’far bin Abi Thalib", 59, 84, "Sebelah depan masjid (Selatan)",
+  "Zona kediaman Ja’far bin Abi Thalib, sepupu Nabi ﷺ yang memimpin hijrah ke Habasyah dan gugur syahid dalam Pertempuran Mu’tah.",
+  "Zona kediaman sepupu Nabi ﷺ di sisi selatan masjid.");
+
+/* Sebelah Belakang Masjid (Utara) */
+addRumah("r-abdurrahman", "Rumah Abdurrahman bin Auf", 40, 23, "Sebelah belakang masjid (Utara)",
+  "Zona kediaman Abdurrahman bin Auf, saudagar dermawan yang termasuk sepuluh sahabat yang dijamin masuk surga, di kawasan utara masjid.",
+  "Zona kediaman saudagar dermawan sahabat Nabi ﷺ di sisi utara.");
+addRumah("r-ibnmasud", "Rumah Abdullah bin Mas’ud", 50, 19, "Sebelah belakang masjid (Utara)",
+  "Zona kediaman Abdullah bin Mas’ud, sahabat yang dikenal luas sebagai ahli Al-Qur’an dan rujukan utama ilmu tafsir serta fikih di kalangan sahabat.",
+  "Zona kediaman sahabat ahli Al-Qur’an di sisi utara masjid.");
+addRumah("r-utbah", "Rumah Utbah bin Mas’ud", 60, 23, "Sebelah belakang masjid (Utara)",
+  "Zona kediaman Utbah bin Mas’ud, saudara kandung Abdullah bin Mas’ud yang turut hijrah ke Habasyah dan menetap di Madinah.",
+  "Zona permukiman saudara Abdullah bin Mas’ud di sisi utara.");
+
+/* Sebelah Kanan Masjid (Barat) */
+addRumah("r-umar-b", "Rumah Umar bin al-Khattab", 32, 46, "Sebelah kanan masjid (Barat)",
+  "Kediaman Khalifah Umar bin al-Khattab di sisi barat masjid yang memiliki akses dekat menuju masjid untuk memimpin salat dan urusan kaum Muslimin.",
+  "Zona kediaman Khalifah Umar bin al-Khattab di sisi barat masjid.");
+addRumah("r-abubakr-b", "Rumah Abu Bakar ash-Shiddiq (Sisi Barat)", 28, 52, "Sebelah kanan masjid (Barat)",
+  "Kediaman Abu Bakar ash-Shiddiq di sisi barat yang memiliki pintu kecil (khaukhah) mengarah ke masjid sebagaimana disebut dalam hadits sahih menjelang wafatnya Nabi ﷺ.",
+  "Zona kediaman Abu Bakar ash-Shiddiq dengan pintu akses ke arah masjid.");
+addRumah("r-nawfal", "Rumah Nawfal bin al-Harits", 22, 42, "Sebelah kanan masjid (Barat)",
+  "Zona kediaman Nawfal bin al-Harits bin Abdul Muththalib, sepupu Nabi ﷺ dari Bani Hasyim, di kawasan barat Masjid Nabawi.",
+  "Zona kediaman sepupu Nabi ﷺ dari Bani Hasyim di sisi barat.");
+addRumah("r-thalhah", "Rumah Thalhah bin Ubaidillah", 31, 35, "Sebelah kanan masjid (Barat)",
+  "Zona kediaman Thalhah bin Ubaidillah, salah satu dari sepuluh sahabat yang dijamin masuk surga dan perisai hidup Nabi ﷺ pada Perang Uhud.",
+  "Zona kediaman sahabat yang dijamin surga di sisi barat laut.");
+addRumah("r-zubair", "Rumah Zubair bin al-Awwam", 25, 37, "Sebelah kanan masjid (Barat)",
+  "Zona kediaman Az-Zubair bin al-Awwam, pembela setia (hawari) Rasulullah ﷺ dan salah satu sahabat yang dijamin masuk surga.",
+  "Zona kediaman hawari Rasulullah ﷺ di sisi barat laut.");
+addRumah("r-tamim", "Rumah Tamim ad-Dari", 18, 37, "Sebelah kanan masjid (Barat)",
+  "Zona kediaman Tamim ad-Dari, sahabat yang dikenal tekun beribadah malam dan mengusulkan penggunaan lampu minyak untuk menerangi Masjid Nabawi.",
+  "Zona kediaman sahabat yang memprakarsai penerangan lampu di Masjid Nabawi.");
+addRumah("r-hassan", "Rumah Hassan bin Tsabit", 20, 48, "Sebelah kanan masjid (Barat)",
+  "Zona kediaman Hassan bin Tsabit al-Anshari, penyair Rasulullah ﷺ yang membela dakwah Islam melalui syair-syairnya.",
+  "Zona kediaman penyair Rasulullah ﷺ di sisi barat masjid.");
+addRumah("r-ammar", "Rumah Ammar bin Yasir", 31, 58, "Sebelah kanan masjid (Barat)",
+  "Zona kediaman Ammar bin Yasir, sahabat generasi awal yang teguh mempertahankan iman bersama keluarganya di Makkah dan aktif membangun Masjid Nabawi.",
+  "Zona kediaman sahabat generasi awal di sisi barat daya masjid.");
+addRumah("r-abusufyan", "Rumah Abu Sufyan bin Harb", 13, 52, "Sebelah kanan masjid (Barat)",
+  "Zona kediaman Abu Sufyan bin Harb di kawasan barat Madinah setelah masuk Islam pada peristiwa Fathu Makkah.",
+  "Zona permukiman Abu Sufyan di sisi barat kawasan masjid.");
+
+/* STATE */
+const $ = s => document.querySelector(s);
+let hiddenCats = new Set();
+let visibleLimit = 8;
+let isMember = localStorage.getItem("js_member") === "1";
+let isSat = false;
+let satCustomUrl = "";
+let isTilted = true;
+let zoom = 1.45;
+let cam = { x: 50, y: 50 };
+let me = null;
+let heading = 0; // 0 = Utara di atas; saat rotasi 360 aktif, map berputar -heading agar arah depan selalu di atas
+let rotateMapWithHeading = true;
+let followUser = false;
+let gpsWatch = null;
+let simMode = false;
+let selectedId = null;
+let activeVoAudio = null;
+
+const mapWrap = $("#mapWrap");
+const plane = $("#plane");
+const root = document.documentElement;
+const clamp = (v, min = 5, max = 95) => Math.max(min, Math.min(max, v));
+
+function updateCamera() {
+  const S = Math.max(Math.min(mapWrap.clientWidth, 640), 340);
+  const tiltDeg = isTilted ? 56 : 0;
+  const rotDeg = rotateMapWithHeading ? -heading : 0;
+  root.style.setProperty("--map-size", S + "px");
+  root.style.setProperty("--tilt", tiltDeg + "deg");
+  root.style.setProperty("--rot", rotDeg + "deg");
+  root.style.setProperty("--zoom", zoom);
+
+  const dx = -(cam.x - 50) / 100 * S;
+  const dy = -(cam.y - 50) / 100 * S;
+  plane.style.transform = `rotateX(${tiltDeg}deg) scale(${zoom}) rotateZ(${rotDeg}deg) translate(${dx}px, ${dy}px)`;
+  $("#compassNeedle").style.transform = `rotate(${rotDeg}deg)`;
+}
+
+/* BUILD ARCHITECTURAL 2.5D MAP OF MASJID NABAWI */
+function buildMap() {
+  plane.innerHTML = `
+    <img id="satImg" alt="Peta Satelit Masjid Nabawi">
+    <svg id="archSvg" viewBox="0 0 100 100" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none">
+      <!-- Batas kawasan ujung perhotelan -->
+      <rect x="4" y="5" width="92" height="90" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="0.55" stroke-dasharray="2 1.2"/>
+      <!-- Blok perhotelan pinggir (Utara, Selatan, Barat, Timur) -->
+      <g fill="#e2e8f0" stroke="#cbd5e1" stroke-width="0.35">
+        <rect x="14" y="7" width="18" height="6" rx="1"/>
+        <rect x="35" y="7" width="30" height="6" rx="1"/>
+        <rect x="68" y="7" width="18" height="6" rx="1"/>
+        <rect x="16" y="88" width="22" height="5.5" rx="1"/>
+        <rect x="41" y="88" width="24" height="5.5" rx="1"/>
+        <rect x="68" y="88" width="16" height="5.5" rx="1"/>
+        <rect x="6" y="20" width="5.5" height="22" rx="1"/>
+        <rect x="6" y="45" width="5.5" height="28" rx="1"/>
+        <rect x="89" y="18" width="5" height="24" rx="1"/>
+      </g>
+      <!-- Kawasan Pemakaman Al-Baqi di Tenggara/Timur -->
+      <rect x="75" y="47" width="17" height="26" rx="2.5" fill="#e5e7eb" stroke="#9ca3af" stroke-width="0.45"/>
+      <text x="83.5" y="69" font-size="2.1" font-weight="700" text-anchor="middle" fill="#4b5563">Al-Baqi’</text>
+
+      <!-- Pelataran Luar / Plaza Payung Masjid Nabawi -->
+      <rect x="24" y="24" width="49" height="50" rx="3" fill="#ffffff" stroke="#cbd5e1" stroke-width="0.5"/>
+      <!-- Pola Grid Payung Pelataran -->
+      <g fill="#e2e8f0">
+        <circle cx="28" cy="28" r="0.8"/><circle cx="32" cy="28" r="0.8"/><circle cx="36" cy="28" r="0.8"/>
+        <circle cx="64" cy="28" r="0.8"/><circle cx="68" cy="28" r="0.8"/>
+        <circle cx="28" cy="68" r="0.8"/><circle cx="32" cy="68" r="0.8"/><circle cx="68" cy="68" r="0.8"/>
+        <circle cx="28" cy="40" r="0.8"/><circle cx="28" cy="50" r="0.8"/><circle cx="28" cy="60" r="0.8"/>
+      </g>
+
+      <!-- Bangunan Utama Masjid Nabawi (Perluasan Modern) -->
+      <rect x="33" y="31" width="33" height="34" rx="1.8" fill="#cbd5e1" stroke="#475569" stroke-width="0.6"/>
+      <!-- Halaman dalam (Sahn) -->
+      <rect x="39" y="36" width="8" height="7" rx="0.8" fill="#f8fafc" stroke="#94a3b8" stroke-width="0.35"/>
+      <rect x="53" y="36" width="8" height="7" rx="0.8" fill="#f8fafc" stroke="#94a3b8" stroke-width="0.35"/>
+      <!-- Bangunan Lama / Utsmaniyah di Tenggara -->
+      <rect x="44" y="51" width="22" height="14" rx="1" fill="#94a3b8" stroke="#334155" stroke-width="0.55"/>
+      <!-- Mihrab / Arah Kiblat Selatan -->
+      <path d="M47 65 h6 v1.4 h-6 z" fill="#1e293b"/>
+      <text x="49.5" y="48" font-size="2.5" font-weight="800" text-anchor="middle" fill="#111315">MASJID NABAWI</text>
+      <text x="50" y="3.8" font-size="2" text-anchor="middle" fill="#64748b">Batas Kawasan Perhotelan</text>
+    </svg>
+  `;
+
+  /* 10 Menara Utama Masjid Nabawi */
+  const minarets = [
+    [33, 31], [44, 31], [55, 31], [66, 31],
+    [33, 48], [66, 48],
+    [33, 65], [44, 65], [56, 65], [66, 65]
+  ];
+  minarets.forEach(([mx, my]) => {
+    const m = document.createElement("div");
+    m.className = "minaret";
+    m.style.left = mx + "%";
+    m.style.top = my + "%";
+    plane.appendChild(m);
+  });
+
+  /* Kubah Hijau */
+  const dome = document.createElement("div");
+  dome.className = "green-dome";
+  dome.style.left = "61%";
+  dome.style.top = "58%";
+  plane.appendChild(dome);
+
+  /* Penanda Arah Mata Angin */
+  [["U", 50, 9], ["S", 50, 91], ["T", 92, 50], ["B", 8, 50]].forEach(([lbl, cx, cy]) => {
+    const c = document.createElement("div");
+    c.className = "bb";
+    c.style.left = cx + "%";
+    c.style.top = cy + "%";
+    c.innerHTML = `<div class="cardinal">${lbl}</div>`;
+    plane.appendChild(c);
+  });
+
+  /* Pin Titik Sejarah */
+  POINTS.forEach(p => {
+    const holder = document.createElement("div");
+    holder.className = "bb";
+    holder.style.left = p.x + "%";
+    holder.style.top = p.y + "%";
+    holder.style.setProperty("--c", CATS[p.cat].color);
+
+    const isGate = p.cat === "pintu" && p.gateNo;
+    holder.innerHTML = `
+      <button class="pin-btn ${isGate ? "gate-pin" : ""}" aria-label="${p.title}">
+        ${isGate ? p.gateNo : ICONS[p.cat]}
+      </button>
+      <span class="pin-label">${p.title}</span>
+    `;
+    holder.querySelector("button").addEventListener("click", e => {
+      e.stopPropagation();
+      handlePointClick(p);
+    });
+    plane.appendChild(holder);
+    p.el = holder;
+  });
+
+  /* Avatar Pengguna + Kerucut Arah Hadap */
+  const userEl = document.createElement("div");
+  userEl.id = "me";
+  userEl.innerHTML = `<div class="cone" id="cone"></div><div class="bb"><div class="avatar"></div></div>`;
+  plane.appendChild(userEl);
+
+  updateCamera();
+}
+
+/* RENDER CATEGORY HIDE/SHOW CHIPS */
+function renderCatToggles() {
+  const wrap = $("#catToggles");
+  wrap.innerHTML = Object.entries(CATS).map(([key, info]) => `
+    <button class="cat-chip ${hiddenCats.has(key) ? "off" : ""}" data-cat="${key}" style="--c:${info.color}">
+      <span class="dot-c"></span>
+      <span>${info.label}</span>
+    </button>
+  `).join("");
+
+  wrap.onclick = e => {
+    const btn = e.target.closest(".cat-chip");
+    if (!btn) return;
+    const cat = btn.dataset.cat;
+    if (hiddenCats.has(cat)) hiddenCats.delete(cat);
+    else hiddenCats.add(cat);
+    renderCatToggles();
+    syncVisibility();
+  };
+}
+
+function syncVisibility() {
+  POINTS.forEach(p => {
+    if (p.el) {
+      p.el.classList.toggle("hidden-cat", hiddenCats.has(p.cat));
+      p.el.classList.toggle("selected", p.id === selectedId);
+      p.el.classList.toggle("active", !!p.detected);
+    }
+  });
+  renderList();
+}
+
+/* RENDER POINT LIST WITH "LANJUTKAN KE BAWAH" */
+function renderList() {
+  const filtered = POINTS.filter(p => !hiddenCats.has(p.cat));
+  const shown = filtered.slice(0, visibleLimit);
+  const listEl = $("#pointList");
+
+  listEl.innerHTML = shown.map(p => {
+    const locked = !p.free && !isMember;
+    const distMeters = Math.round(p.walkMin * 65);
+    return `
+      <li class="point-item" data-id="${p.id}" style="--c:${CATS[p.cat].color}">
+        <div class="point-ico">${ICONS[p.cat]}</div>
+        <div class="point-body">
+          <div class="point-title">
+            <span>${p.title}</span>
+            ${locked ? `<span class="lock-tag">🔒 Member</span>` : ""}
+          </div>
+          <div class="point-meta">
+            <span class="dist-badge">🚶 ±${distMeters} m · ${p.walkMin} mnt</span>
+            <span>${p.ref}</span>
+          </div>
+        </div>
+      </li>
+    `;
+  }).join("");
+
+  listEl.onclick = e => {
+    const item = e.target.closest(".point-item");
+    if (!item) return;
+    const pt = POINTS.find(x => x.id === item.dataset.id);
+    if (pt) handlePointClick(pt);
+  };
+
+  const moreBtn = $("#btnLoadMore");
+  if (visibleLimit >= filtered.length) {
+    moreBtn.style.display = "none";
+  } else {
+    moreBtn.style.display = "inline-block";
+    moreBtn.textContent = `Lanjutkan ke bawah (${filtered.length - visibleLimit} titik lagi)`;
+  }
+}
+
+$("#btnLoadMore").onclick = () => {
+  visibleLimit += 8;
+  renderList();
+};
+
+/* HANDLE POINT CLICK & PAYWALL */
+function handlePointClick(p) {
+  selectedId = p.id;
+  syncVisibility();
+  if (!p.free && !isMember) {
+    openMemberModal(p.title);
+    return;
+  }
+  openDetailSheet(p);
+}
+
+function openDetailSheet(p) {
+  stopVo();
+  const sheet = $("#detailSheet");
+  sheet.style.setProperty("--c", CATS[p.cat].color);
+  const distMeters = Math.round(p.walkMin * 65);
+
+  sheet.innerHTML = `
+    <span class="sheet-cat">${CATS[p.cat].label}${p.gateNo ? " · " + p.gateNo : ""}</span>
+    <h2>${p.title}</h2>
+    <div class="sheet-meta">
+      <span>🚶 Jarak ±${distMeters} m (sekitar ${p.walkMin} menit jalan kaki)</span>
+      <span>📍 ${p.ref}</span>
+    </div>
+
+    <div class="vo-box">
+      <button class="vo-play" id="btnPlayVo">🔊 Dengarkan Narasi Suara</button>
+      <label class="vo-upload">
+        Pasang file audio (MP3/M4A)
+        <input type="file" id="inpVoFile" accept="audio/*" hidden>
+      </label>
+    </div>
+
+    <div class="photo-grid">
+      <div class="photo-slot" id="slotArah">
+        ${p.fotoArah ? `<img src="${p.fotoArah}" alt="Foto arah jalan">` : `<div><strong>Foto Patokan Arah</strong><br>Belum dipasang</div>`}
+        <label>Pilih foto<input type="file" data-kind="fotoArah" accept="image/*" hidden></label>
+      </div>
+      <div class="photo-slot" id="slotLokasi">
+        ${p.fotoLokasi ? `<img src="${p.fotoLokasi}" alt="Foto lokasi">` : `<div><strong>Foto Lokasi</strong><br>Belum dipasang</div>`}
+        <label>Pilih foto<input type="file" data-kind="fotoLokasi" accept="image/*" hidden></label>
+      </div>
+    </div>
+
+    <p>${p.narr}</p>
+    <div class="key-box">${p.key}</div>
+    ${p.approx ? `<div class="approx-note">${APPROX_TEXT}</div>` : ""}
+
+    <div style="margin-top:14px;text-align:right">
+      <button class="pill on" id="btnCloseDetail">Tutup</button>
+    </div>
+  `;
+
+  $("#btnPlayVo").onclick = () => {
+    if (!p.vo) {
+      alert("File audio belum dipasang untuk titik ini. Klik 'Pasang file audio' atau isi properti vo pada data titik di kode.");
+      return;
+    }
+    if (activeVoAudio && !activeVoAudio.paused) {
+      stopVo();
+      $("#btnPlayVo").textContent = "🔊 Dengarkan Narasi Suara";
+    } else {
+      activeVoAudio = new Audio(p.vo);
+      activeVoAudio.play();
+      $("#btnPlayVo").textContent = "⏸ Jeda Narasi Suara";
+      activeVoAudio.onended = () => { $("#btnPlayVo").textContent = "🔊 Dengarkan Narasi Suara"; };
+    }
+  };
+
+  $("#inpVoFile").onchange = e => {
+    const f = e.target.files[0];
+    if (f) {
+      p.vo = URL.createObjectURL(f);
+      $("#btnPlayVo").textContent = "🔊 Putar: " + f.name.slice(0, 18);
+    }
+  };
+
+  sheet.querySelectorAll('input[type="file"][data-kind]').forEach(inp => {
+    inp.onchange = e => {
+      const f = e.target.files[0];
+      if (f) {
+        p[inp.dataset.kind] = URL.createObjectURL(f);
+        openDetailSheet(p);
+      }
+    };
+  });
+
+  $("#btnCloseDetail").onclick = closeModals;
+  openModal(sheet);
+}
+
+function stopVo() {
+  if (activeVoAudio) {
+    activeVoAudio.pause();
+    activeVoAudio = null;
+  }
+}
+
+/* MEMBER LOGIN & LANDING PAGE PAYWALL */
+function openMemberModal(lockedTitle = "") {
+  const sheet = $("#memberSheet");
+  sheet.innerHTML = `
+    <span class="sheet-cat" style="background:#111315">Akses Member Jejak Sirah</span>
+    <h2>${lockedTitle ? `Buka "${lockedTitle}" & Seluruh Titik Rumah Sahabat` : "Jelajah Sejarah Lengkap Tanpa Batas"}</h2>
+    <p style="font-size:13.5px;color:var(--sub);margin:6px 0">
+      Dapatkan akses penuh ke seluruh pemetaan rumah sahabat di empat penjuru Masjid Nabawi, narasi suara (voiceover), dan pembaruan kawasan berikutnya.
+    </p>
+
+    <div class="plan-grid">
+      <div class="plan-card">
+        <div style="font-size:12px;font-weight:700;color:var(--sub)">PAKET UMRAH 14 HARI</div>
+        <div class="plan-price">Rp 49.000</div>
+        <div style="font-size:12.5px;color:var(--sub)">Akses penuh seluruh titik Masjid Nabawi + audio panduan selama 14 hari.</div>
+      </div>
+      <div class="plan-card featured">
+        <div style="font-size:12px;font-weight:700;color:var(--nav)">PAKET PENUH 1 TAHUN</div>
+        <div class="plan-price">Rp 99.000</div>
+        <div style="font-size:12.5px;color:var(--sub)">Akses seluruh kawasan (Masjid Nabawi + pembaruan Masjidil Haram &amp; Quba).</div>
+      </div>
+    </div>
+
+    <div style="background:var(--surface);padding:12px;border-radius:14px;border:1px solid var(--border)">
+      <strong style="font-size:13.5px">Sudah punya kode akses member?</strong>
+      <div class="form-row">
+        <input type="text" id="inpMemberCode" placeholder="Masukkan kode (uji coba: NABAWI2026)">
+        <button class="pill on" id="btnDoLogin">Masuk</button>
+      </div>
+      <div id="loginMsg" style="font-size:12.5px;margin-top:6px;color:var(--nav)"></div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:8px;flex-wrap:wrap">
+      ${isMember ? `<button class="pill" id="btnLogout">Keluar Member</button>` : `<span></span>`}
+      <button class="pill" id="btnCloseMember">Tutup</button>
+    </div>
+  `;
+
+  $("#btnDoLogin").onclick = () => {
+    const code = $("#inpMemberCode").value.trim().toUpperCase();
+    if (code === "NABAWI2026" || code.length >= 6) {
+      isMember = true;
+      localStorage.setItem("js_member", "1");
+      updateMemberBtn();
+      renderList();
+      closeModals();
+    } else {
+      $("#loginMsg").textContent = "Kode tidak valid. Gunakan kode uji coba: NABAWI2026";
+    }
+  };
+
+  if ($("#btnLogout")) {
+    $("#btnLogout").onclick = () => {
+      isMember = false;
+      localStorage.removeItem("js_member");
+      updateMemberBtn();
+      renderList();
+      closeModals();
+    };
+  }
+
+  $("#btnCloseMember").onclick = closeModals;
+  openModal(sheet);
+}
+
+function updateMemberBtn() {
+  const btn = $("#btnMember");
+  if (isMember) {
+    btn.textContent = "✓ Member Aktif";
+    btn.classList.add("logged");
+  } else {
+    btn.textContent = "Masuk Member";
+    btn.classList.remove("logged");
+  }
+}
+
+$("#btnMember").onclick = () => openMemberModal();
+
+function openModal(el) {
+  $("#backdrop").classList.add("open");
+  el.classList.add("open");
+}
+function closeModals() {
+  stopVo();
+  $("#backdrop").classList.remove("open");
+  $("#detailSheet").classList.remove("open");
+  $("#memberSheet").classList.remove("open");
+}
+$("#backdrop").onclick = closeModals;
+
+/* HEADER AREA MENU */
+document.querySelectorAll(".loc-btn").forEach(btn => {
+  btn.onclick = () => {
+    if (btn.dataset.area !== "nabawi") {
+      alert("Kawasan " + btn.textContent + " sedang disiapkan untuk pembaruan berikutnya.");
+    }
+  };
+});
+
+/* MAP TYPE (DEFAULT / SATELLITE) & FULLSCREEN & COMPASS TILT */
+$("#btnMapDefault").onclick = () => {
+  isSat = false;
+  plane.classList.remove("sat-mode");
+  $("#archSvg").style.opacity = "1";
+  $("#btnMapDefault").classList.add("active-btn");
+  $("#btnMapSat").classList.remove("active-btn");
+  $("#lblUploadSat").style.display = "none";
+};
+
+$("#btnMapSat").onclick = () => {
+  isSat = true;
+  plane.classList.add("sat-mode");
+  $("#archSvg").style.opacity = satCustomUrl ? "0.28" : "0.75";
+  $("#btnMapSat").classList.add("active-btn");
+  $("#btnMapDefault").classList.remove("active-btn");
+  $("#lblUploadSat").style.display = "inline-flex";
+};
+
+$("#inpSatFile").onchange = e => {
+  const f = e.target.files[0];
+  if (!f) return;
+  satCustomUrl = URL.createObjectURL(f);
+  const img = $("#satImg");
+  img.src = satCustomUrl;
+  img.classList.add("has-img");
+  $("#archSvg").style.opacity = "0.25";
+};
+
+$("#btnFull").onclick = () => {
+  mapWrap.classList.toggle("fullscreen");
+  $("#btnFull").textContent = mapWrap.classList.contains("fullscreen") ? "✕" : "⛶";
+  updateCamera();
+};
+
+$("#btnCompassView").onclick = () => {
+  isTilted = !isTilted;
+  zoom = isTilted ? 1.45 : 1.05;
+  updateCamera();
+};
+
+$("#btnRecenter").onclick = () => {
+  followUser = true;
+  $("#btnRecenter").classList.remove("show");
+  cam = me ? { x: me.x, y: me.y } : { x: 50, y: 50 };
+  updateCamera();
+};
+
+/* TOUCH GESTURES: 1-FINGER PAN + 2-FINGER PINCH ZOOM */
+let pointers = new Map();
+let panStart = null;
+let pinchStartDist = 0;
+let pinchStartZoom = zoom;
+
+mapWrap.addEventListener("pointerdown", e => {
+  if (e.target.closest(".fab, label, .pin-btn")) return;
+  mapWrap.setPointerCapture(e.pointerId);
+  pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
+  if (pointers.size === 1) {
+    panStart = { x: e.clientX, y: e.clientY, cx: cam.x, cy: cam.y };
+    plane.classList.add("dragging");
+  } else if (pointers.size === 2) {
+    const pts = [...pointers.values()];
+    pinchStartDist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+    pinchStartZoom = zoom;
+  }
+});
+
+mapWrap.addEventListener("pointermove", e => {
+  if (!pointers.has(e.pointerId)) return;
+  pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
+  if (pointers.size === 2 && pinchStartDist > 0) {
+    const pts = [...pointers.values()];
+    const curDist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+    zoom = Math.max(0.85, Math.min(3.2, pinchStartZoom * (curDist / pinchStartDist)));
+    updateCamera();
+  } else if (pointers.size === 1 && panStart) {
+    const dx = e.clientX - panStart.x;
+    const dy = e.clientY - panStart.y;
+    if (Math.hypot(dx, dy) > 6) {
+      followUser = false;
+      $("#btnRecenter").classList.add("show");
+      const S = Math.max(Math.min(mapWrap.clientWidth, 640), 340);
+      const scaleFactor = 100 / (S * zoom);
+      const rad = (rotateMapWithHeading ? -heading : 0) * Math.PI / 180;
+      const rx = dx * Math.cos(-rad) - dy * Math.sin(-rad);
+      const ry = dx * Math.sin(-rad) + dy * Math.cos(-rad);
+      cam = {
+        x: clamp(panStart.cx - rx * scaleFactor, 10, 90),
+        y: clamp(panStart.cy - ry * scaleFactor, 10, 90)
+      };
+      updateCamera();
+    }
+  }
+});
+
+const endPointer = e => {
+  pointers.delete(e.pointerId);
+  if (pointers.size === 0) {
+    panStart = null;
+    pinchStartDist = 0;
+    plane.classList.remove("dragging");
+  }
+};
+mapWrap.addEventListener("pointerup", endPointer);
+mapWrap.addEventListener("pointercancel", endPointer);
+
+/* USER LOCATION, 360 HEADING & SIMULATION */
+function setUserPos(x, y) {
+  me = { x: clamp(x, 6, 94), y: clamp(y, 6, 94) };
+  refreshUserAndDetection();
+}
+
+function refreshUserAndDetection() {
+  if (!me) return;
+  const userEl = $("#me");
+  userEl.style.display = "block";
+  userEl.style.left = me.x + "%";
+  userEl.style.top = me.y + "%";
+  $("#cone").style.transform = `rotate(${heading}deg)`;
+
+  const hits = [];
+  POINTS.forEach(p => {
+    if (hiddenCats.has(p.cat)) { p.detected = false; return; }
+    const dx = p.x - me.x;
+    const dy = p.y - me.y;
+    const dist = Math.hypot(dx, dy);
+    const bearing = (Math.atan2(dx, -dy) * 180 / Math.PI + 360) % 360;
+    let diff = Math.abs(bearing - heading);
+    if (diff > 180) diff = 360 - diff;
+
+    const isNear = dist <= CFG.nearDist;
+    const isFacing = dist <= CFG.faceDist && diff <= CFG.coneAngle / 2;
+    p.detected = isNear || isFacing;
+    if (p.detected) hits.push({ p, dist, isNear });
+  });
+
+  hits.sort((a, b) => a.dist - b.dist);
+  syncVisibility();
+
+  const status = $("#statusBox");
+  if (hits.length) {
+    status.innerHTML = `<strong>Terdeteksi di arah depanmu:</strong>`;
+    hits.slice(0, 2).forEach(({ p, isNear }) => {
+      const b = document.createElement("button");
+      b.className = "detected-btn";
+      b.innerHTML = `<span>${isNear ? "📍 Dekat" : "🧭 Di depan"} · ${p.title}</span><span>Buka →</span>`;
+      b.onclick = () => handlePointClick(p);
+      status.appendChild(b);
+    });
+  } else {
+    status.textContent = "Arahkan ponselmu ke bangunan atau sisi masjid di sekitar untuk memunculkan titik sejarah di depanmu.";
+  }
+
+  if (followUser) {
+    cam = { x: me.x, y: me.y };
+  }
+  updateCamera();
+}
+
+const latLngToMap = (lat, lng) => [
+  50 + (lng - CFG.center.lng) / CFG.span.lng * 100,
+  50 - (lat - CFG.center.lat) / CFG.span.lat * 100
+];
+
+$("#bGps").onclick = () => {
+  if (!navigator.geolocation) {
+    $("#statusBox").textContent = "Perangkat tidak mendukung GPS. Gunakan Mode Simulasi.";
+    return;
+  }
+  if (gpsWatch !== null) {
+    navigator.geolocation.clearWatch(gpsWatch);
+    gpsWatch = null;
+    $("#bGps").classList.remove("on");
+    $("#bGps").textContent = "Aktifkan Lokasi";
+    return;
+  }
+  simMode = false;
+  $("#simPanel").style.display = "none";
+  $("#bSim").classList.remove("on");
+  followUser = true;
+  $("#btnRecenter").classList.remove("show");
+  $("#bGps").classList.add("on");
+  $("#bGps").textContent = "Lokasi Aktif";
+
+  gpsWatch = navigator.geolocation.watchPosition(
+    pos => {
+      const [mx, my] = latLngToMap(pos.coords.latitude, pos.coords.longitude);
+      setUserPos(mx, my);
+    },
+    () => {
+      $("#statusBox").textContent = "Izin lokasi ditolak atau sinyal lemah. Coba Mode Simulasi.";
+      gpsWatch = null;
+      $("#bGps").classList.remove("on");
+      $("#bGps").textContent = "Aktifkan Lokasi";
+    },
+    { enableHighAccuracy: true, maximumAge: 2000 }
+  );
+};
+
+$("#bCmp").onclick = async () => {
+  try {
+    if (typeof DeviceOrientationEvent !== "undefined" && DeviceOrientationEvent.requestPermission) {
+      const res = await DeviceOrientationEvent.requestPermission();
+      if (res !== "granted") throw new Error();
+    }
+    const onOrient = e => {
+      if (simMode) return;
+      let deg = e.webkitCompassHeading;
+      if (deg == null && e.alpha != null) deg = 360 - e.alpha;
+      if (deg != null) {
+        heading = (deg + 360) % 360;
+        refreshUserAndDetection();
+      }
+    };
+    window.addEventListener("deviceorientationabsolute", onOrient, true);
+    window.addEventListener("deviceorientation", onOrient, true);
+    $("#bCmp").classList.add("on");
+    $("#bCmp").textContent = "Kompas 360° Aktif";
+  } catch {
+    $("#statusBox").textContent = "Sensor kompas tidak tersedia atau izin ditolak. Gunakan slider di Mode Simulasi.";
+  }
+};
+
+$("#bSim").onclick = () => {
+  simMode = !simMode;
+  $("#bSim").classList.toggle("on", simMode);
+  $("#simPanel").style.display = simMode ? "flex" : "none";
+  if (simMode) {
+    followUser = true;
+    $("#btnRecenter").classList.remove("show");
+    if (!me) setUserPos(50, 74);
+    else refreshUserAndDetection();
+  }
+};
+
+$("#hdSlider").oninput = e => {
+  heading = Number(e.target.value);
+  $("#hdVal").textContent = heading + "°";
+  refreshUserAndDetection();
+};
+
+$("#simPanel").querySelector(".dpad").onclick = e => {
+  const mv = e.target.dataset.mv;
+  if (!mv || !me) return;
+  const [dx, dy] = mv.split(",").map(Number);
+  followUser = true;
+  setUserPos(me.x + dx * 2.5, me.y + dy * 2.5);
+};
+
+window.addEventListener("resize", updateCamera);
+
+/* INIT */
+buildMap();
+renderCatToggles();
+syncVisibility();
+updateMemberBtn();
+</script>
+</body>
+</html>
